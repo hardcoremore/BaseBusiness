@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:SkinBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				  xmlns:s="library://ns.adobe.com/flex/spark" 
+    			  xmlns:fb="http://ns.adobe.com/flashbuilder/2009" 
+				  alpha.disabled="0.5"  
+				  xmlns:Library="com.desktop.system.Application.Library.*" 
+				  xmlns:Button="com.desktop.ui.Components.Button.*"
+				  xmlns:Group="com.desktop.ui.Components.Group.*"
+				  xmlns:mx="library://ns.adobe.com/flex/mx" 
+				  xmlns:app="components.app.*"
+				  xmlns:ui="com.desktop.system.Application.Library.ui.*">
+	
+	<fx:Metadata>[HostComponent("interfaces.modules.sub.ISaveItemModule")]</fx:Metadata>
+	<fx:Script>
+		<![CDATA[
+			import com.desktop.system.Application.Library.ui.FormHelper;
+		]]>
+	</fx:Script>
+	
+    <ui:states>
+        <s:State name="normal" />
+        <s:State name="disabled" />
+    </ui:states>
+    
+    <!--
+        Note: setting the minimum size to 0 here so that changes to the host component's
+        size will not be thwarted by this skin part's minimum size.   This is a compromise,
+        more about it here: http://bugs.adobe.com/jira/browse/SDK-21143
+    -->
+    <!--- @copy spark.components.SkinnableContainer#contentGroup -->
+
+	<s:Scroller id="scroller" top="0" left="0" bottom="0" right="0" skinClass="spark.skins.spark.ScrollerSkin">
+		
+		<s:Group id="contentGroup" minWidth="0" minHeight="0" top="0" bottom="0" right="0" left="0">
+			
+			<Group:ModuleNotification id="notifier" 
+									  width="100%" 
+									  height="100%"
+									  minHeight="{ itemForm.height }" minWidth="{ itemForm.width }"
+									  skinClass="skins.Default.components.Group.ModuleNotificationSkin">
+				
+				<Group:LoadingContainer id="loadingContainer" width="100%" height="100%"
+										skinClass="skins.Default.components.Group.LoadingContainerSkin">
+					
+						<s:HGroup width="100%" height="100%">
+							
+							<s:Form id="itemForm" skinClass="spark.skins.spark.FormSkin">
+								
+								<s:layout>
+									<s:FormLayout gap="1" />
+								</s:layout>
+								
+								<s:FormItem  label="ID" skinClass="spark.skins.spark.FormItemSkin" visible="false" height="0">
+									<s:TextInput id="storage_item_id" skinClass="spark.skins.spark.TextInputSkin" width="250" />
+								</s:FormItem>
+								
+								<s:FormItem  label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'code') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:TextInput id="storage_item_code" skinClass="spark.skins.spark.TextInputSkin" width="250"  />
+								</s:FormItem>
+								
+								<s:FormItem  label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'name') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:TextInput id="storage_item_name" skinClass="spark.skins.spark.TextInputSkin" width="250"  />
+								</s:FormItem>
+								
+								<s:FormItem  label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'description') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:TextArea id="storage_item_descrition" skinClass="spark.skins.spark.TextInputSkin" width="250" heightInLines="3" />
+								</s:FormItem>
+								
+								<s:FormItem  label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'category') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:ComboBox id="storage_item_category" skinClass="spark.skins.spark.ComboBoxSkin" width="250"  requireSelection="true" labelToItemFunction="{FormHelper.disableLabelToItemFunction}" />
+								</s:FormItem>
+								
+								<s:FormItem  label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'orderQuantity') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:TextInput id="storage_item_order_quantity" skinClass="spark.skins.spark.TextInputSkin" width="250"  />
+								</s:FormItem>
+								
+								<s:FormItem  label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'volume') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:TextInput id="storage_item_volume" skinClass="spark.skins.spark.TextInputSkin" width="250"  />
+								</s:FormItem>
+								
+								<s:FormItem  label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'weight') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:TextInput id="storage_item_weight" skinClass="spark.skins.spark.TextInputSkin" width="250"  />
+								</s:FormItem>
+								
+								<s:FormItem  label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'type') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:ComboBox id="storage_item_type" skinClass="spark.skins.spark.ComboBoxSkin" width="250"  requireSelection="true" labelToItemFunction="{FormHelper.disableLabelToItemFunction}" />
+								</s:FormItem>
+								
+								<s:FormItem  label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'unitOfMeasure') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:ComboBox id="storage_item_unit_of_measure" skinClass="spark.skins.spark.ComboBoxSkin" width="250"  requireSelection="true" labelToItemFunction="{FormHelper.disableLabelToItemFunction}"/>
+								</s:FormItem>
+								
+								<s:FormItem  label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'barCode') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:TextInput id="storage_item_bar_code" skinClass="spark.skins.spark.TextInputSkin" width="250"  />
+								</s:FormItem>
+								
+								<s:FormItem  label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'taxAmmount') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:ComboBox id="storage_item_tax_percent" skinClass="spark.skins.spark.ComboBoxSkin" width="250"  requireSelection="true" labelToItemFunction="{FormHelper.disableLabelToItemFunction}">
+										<s:dataProvider>
+											<s:ArrayList>
+												<fx:Number>0</fx:Number>
+												<fx:Number>5</fx:Number>
+												<fx:Number>8</fx:Number>
+												<fx:Number>10</fx:Number>
+												<fx:Number>18</fx:Number>
+												<fx:Number>22</fx:Number>
+											</s:ArrayList>
+										</s:dataProvider>
+									</s:ComboBox>
+								</s:FormItem>
+								
+								<s:FormItem  label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'creationDate') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<mx:DateField id="storage_item_date_created" width="250"  />
+								</s:FormItem>
+								
+								
+								<s:FormItem skinClass="spark.skins.spark.FormItemSkin">
+									<app:SaveData id="saveDataCmp" skinClass="skins.Default.components.app.SaveDataSkin" />
+								</s:FormItem>
+								
+							</s:Form>
+							
+						</s:HGroup>
+				
+				</Group:LoadingContainer>
+				
+			</Group:ModuleNotification>
+			
+		</s:Group>
+
+	</s:Scroller>
+	
+</ui:SkinBase>

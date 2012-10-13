@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:SkinBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			 xmlns:s="library://ns.adobe.com/flex/spark" 
+    		 xmlns:fb="http://ns.adobe.com/flashbuilder/2009" 
+			 alpha.disabled="0.5" 
+			 xmlns:Library="com.desktop.system.Application.Library.*" 
+			 xmlns:ui="com.desktop.system.Application.Library.ui.*">
+	
+	<fx:Metadata>[HostComponent("interfaces.modules.sub.INewItem")]</fx:Metadata>
+
+    <fx:Script fb:purpose="styling">
+        <![CDATA[         
+			import com.desktop.system.core.SystemSession;
+			
+			import utility.Icons;
+            /**
+             *  @private
+             */
+            override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number) : void
+            {
+                // Push backgroundColor and backgroundAlpha directly.
+                // Handle undefined backgroundColor by hiding the background object.
+                if (isNaN(getStyle("backgroundColor")))
+                {
+                    background.visible = false;
+                }
+                else
+                {
+                    background.visible = true;
+                    bgFill.color = getStyle("backgroundColor");
+                    bgFill.alpha = getStyle("backgroundAlpha");
+                }
+                
+                super.updateDisplayList(unscaledWidth, unscaledHeight);
+            }
+        ]]>        
+    </fx:Script>
+    
+    <ui:states>
+        <s:State name="normal" />
+        <s:State name="disabled" />
+    </ui:states>
+    
+    <!--- Defines the appearance of the SkinnableContainer class's background. -->
+    <s:Rect id="background" left="0" right="0" top="0" bottom="0">
+        <s:fill>
+            <!--- @private -->
+            <s:SolidColor id="bgFill" color="#FFFFFF"/>
+        </s:fill>
+    </s:Rect>
+    
+    <!--
+        Note: setting the minimum size to 0 here so that changes to the host component's
+        size will not be thwarted by this skin part's minimum size.   This is a compromise,
+        more about it here: http://bugs.adobe.com/jira/browse/SDK-21143
+    -->
+    <!--- @copy spark.components.SkinnableContainer#contentGroup -->
+    <s:Group id="contentGroup" left="0" right="0" top="0" bottom="0" minWidth="0" minHeight="0">
+        <s:layout>
+            <s:BasicLayout/>
+        </s:layout>
+		
+		<s:Form skinClass="spark.skins.spark.FormSkin" width="100%" height="100%">
+			
+			<s:FormItem skinClass="spark.skins.spark.FormItemSkin" 
+						label="{ resourceManager.getString( this.session.config.dictonaryResourceName, 'productServiceId', this.session.languageLocaleName ) }: ">
+				<s:TextInput id="itemIdInput" skinClass="spark.skins.spark.TextInputSkin"/>
+			</s:FormItem>
+			
+			<s:FormItem skinClass="spark.skins.spark.FormItemSkin" 
+						label="{ resourceManager.getString( this.session.config.dictonaryResourceName, 'productServiceName', this.session.languageLocaleName ) }: ">
+				<s:TextInput id="itemNameInput" skinClass="spark.skins.spark.TextInputSkin"/>
+			</s:FormItem>
+			
+			<s:FormItem skinClass="spark.skins.spark.FormItemSkin" 
+						label="{ resourceManager.getString( this.session.config.dictonaryResourceName, 'productServiceName', this.session.languageLocaleName ) }: ">
+				<s:TextInput id="additionalNameInput" skinClass="spark.skins.spark.TextInputSkin"/>
+			</s:FormItem>
+			
+			<s:FormItem skinClass="spark.skins.spark.FormItemSkin" 
+						label="{ resourceManager.getString( this.session.config.dictonaryResourceName, 'productServiceName', this.session.languageLocaleName ) }: ">
+				<s:TextInput id="itemTypeInput" skinClass="spark.skins.spark.TextInputSkin"/>
+			</s:FormItem>
+			
+			<s:FormItem skinClass="spark.skins.spark.FormItemSkin" 
+						label="{ resourceManager.getString( this.session.config.dictonaryResourceName, 'productServiceName', this.session.languageLocaleName ) }: ">
+				<s:ComboBox id="measurmentInput" skinClass="spark.skins.spark.ComboBoxSkin"/>
+			</s:FormItem>
+			
+			<s:FormItem skinClass="spark.skins.spark.FormItemSkin" 
+						label="{ resourceManager.getString( this.session.config.dictonaryResourceName, 'productServiceName', this.session.languageLocaleName ) }: ">
+				<s:ComboBox id="taxInput" skinClass="spark.skins.spark.ComboBoxSkin"/>
+			</s:FormItem>
+			
+			<s:FormItem skinClass="spark.skins.spark.FormItemSkin" 
+						label="{ resourceManager.getString( this.session.config.dictonaryResourceName, 'productServiceName', this.session.languageLocaleName ) }: ">
+				<s:TextInput id="recommendedPriceTF" skinClass="spark.skins.spark.TextInputSkin" />
+			</s:FormItem>
+			
+			<s:FormItem skinClass="spark.skins.spark.FormItemSkin">
+				
+				<s:HGroup>
+					<s:Button id="saveAssociateButton" 
+							  label="{ resourceManager.getString( this.session.config.dictonaryResourceName, 'save', this.session.languageLocaleName ) }"  
+							  icon="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.systemIconsResourceName, 'saveIcon', this.session.skinsLocaleName )}" 
+							  skinClass="{resourceManager.getClass( this.session.config.skinsResourceName, 'desktopButton', this.session.skinsLocaleName ) }"/>
+					<s:Button id="resetAssociateButton" 
+							  label="{ resourceManager.getString( this.session.config.dictonaryResourceName, 'reset', this.session.languageLocaleName ) }"  
+							  icon="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.systemIconsResourceName, 'clearIcon', this.session.skinsLocaleName )}" 
+							  skinClass="{resourceManager.getClass( this.session.config.skinsResourceName, 'desktopButton', this.session.skinsLocaleName ) }"/>
+				</s:HGroup>
+				
+			</s:FormItem>
+		</s:Form>
+		
+    </s:Group>
+
+</ui:SkinBase>

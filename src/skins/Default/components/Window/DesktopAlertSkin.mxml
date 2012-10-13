@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:SkinBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx"
+		xmlns:ui="com.desktop.system.Application.Library.ui.*"
+		xmlns:Window="com.desktop.ui.Components.Window.*">
+	
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("com.desktop.ui.Components.Window.DesktopAlert")]
+	</fx:Metadata>
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			protected function panelWindow_creationCompleteHandler(event:FlexEvent):void
+			{
+				trace( hostComponent.maxWidth );
+				//messageLabel.maxWidth = hostComponent.maxWidth;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<Window:DesktopWindow id="panelWindow" 
+						  skinClass="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.skinsResourceName, 'desktopWindowComponent', this.session.skinsLocaleName ) }"
+						  title="{hostComponent.title}" 
+						  backgroundColor="#FFFFFF" maxWidth="{hostComponent.maxWidth}"
+						  minWidth="150" creationComplete="panelWindow_creationCompleteHandler(event)">
+		
+		<s:HGroup width="100%" height="100%" 
+				  id="mainGroup"
+				  verticalAlign="middle" 
+				  horizontalAlign="center" 
+				  paddingLeft="5"
+				  paddingRight="5"
+				  paddingTop="5"
+				  paddingBottom="5">
+			
+			<s:BitmapImage source="{ getStyle( 'icon' ) }" width="{ getStyle( 'iconSize' ) } " 
+						   height="{ getStyle( 'iconSize' ) }"  
+						   smooth="true"
+						   smoothingQuality="high"
+						   id="bodyImage"/>
+			
+			<s:VGroup verticalAlign="middle" horizontalAlign="center">
+				
+				<s:Label text="{ hostComponent.message }"
+						 id="messageLabel" lineBreak="toFit" paddingLeft="10"  
+						 fontSize="14" paddingRight="5" maxWidth="{ hostComponent.maxWidth - bodyImage.width - ( panelWindow.getStyle( 'borderThickness' ) * 2 ) - 15 }"/>
+				
+				<s:HGroup id="buttonGroup" horizontalAlign="center" gap="20" paddingTop="10" />
+					
+			</s:VGroup>
+				
+		</s:HGroup>
+		
+	</Window:DesktopWindow>
+	
+</ui:SkinBase>

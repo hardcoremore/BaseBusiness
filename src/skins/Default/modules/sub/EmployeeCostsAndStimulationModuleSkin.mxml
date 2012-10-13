@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:SkinBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			 xmlns:s="library://ns.adobe.com/flex/spark" 
+			 xmlns:fb="http://ns.adobe.com/flashbuilder/2009" 
+			 alpha.disabled="0.5"  
+			 xmlns:Library="com.desktop.system.Application.Library.*" 
+			 xmlns:Button="com.desktop.ui.Components.Button.*"
+			 xmlns:ui="com.desktop.system.Application.Library.ui.*"
+			 xmlns:Group="com.desktop.ui.Components.Group.*" 
+			 xmlns:mx="library://ns.adobe.com/flex/mx" 
+			 xmlns:app="components.app.*">
+	
+	<fx:Metadata>[HostComponent("interfaces.modules.sub.IEmployeeSalaryModule")]</fx:Metadata>
+	<fx:Script>
+		<![CDATA[
+			import com.desktop.system.Application.Library.ui.FormHelper;
+			
+			import spark.filters.GlowFilter;
+		]]>
+	</fx:Script>
+	
+	<ui:states>
+		<s:State name="normal" />
+		<s:State name="disabled" />
+	</ui:states>
+	
+	<s:Scroller id="scroller" top="0" left="0" bottom="0" right="0"
+				skinClass="spark.skins.spark.ScrollerSkin">
+		
+		<s:Group id="contentGroup" minHeight="0" minWidth="0" top="0" left="0" right="0" bottom="0">
+			
+			<Group:ModuleNotification id="notifier" 
+									  width="100%" height="100%" 
+									  minHeight="{ notifier.minHeight = controllGroup.height + costsGroup.height + stimlationGroup.height + controllGroup.height + 40 }"
+									  minWidth="{ Math.max( controllGroup.width, costsGroup.width, stimlationGroup.width, searchGroup.width ) }"
+									  skinClass="skins.Default.components.Group.ModuleNotificationSkin">
+				
+				<Group:LoadingContainer id="loadingContainer" 
+										width="100%" height="100%" 
+										skinClass="skins.Default.components.Group.LoadingContainerSkin">
+					
+					<s:VGroup id="mainGroup" horizontalAlign="center" width="100%" height="100%" paddingTop="20">
+						
+						<s:HGroup id="searchGroup"
+								  verticalAlign="middle"
+								  paddingLeft="10">
+							
+							<s:Label id="emploeeNameLabel" fontFamily="Verdana" fontWeight="bold" fontSize="15" />
+							
+							<s:FormItem skinClass="spark.skins.spark.StackedFormItemSkin" label="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'year')}:">
+								<s:ComboBox id="employee_costs_and_stimulations_year" skinClass="spark.skins.spark.ComboBoxSkin" />
+							</s:FormItem>
+							
+							<s:FormItem skinClass="spark.skins.spark.StackedFormItemSkin" label="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'month')}:">
+								<s:ComboBox id="employee_costs_and_stimulations_month"  skinClass="spark.skins.spark.ComboBoxSkin"/>
+							</s:FormItem>
+							
+							<Button:DesktopControllButton id="searchCostAndStimulationButton"
+														  toolTip="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'load')}"  
+														  icon="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.systemIconsResourceName, 'updateIcon', this.session.skinsLocaleName )}" 
+														  skinClass="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.skinsResourceName, 'desktopButton', this.session.skinsLocaleName ) }"/>
+							
+							
+						</s:HGroup>
+						
+						<s:VGroup id="costsGroup" paddingLeft="10" paddingTop="20">
+							
+							<s:HGroup width="100%" horizontalAlign="center" gap="120" paddingLeft="100">
+								<s:Label fontWeight="bold" fontSize="15" text="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'limit')}" />
+								<s:Label fontWeight="bold" fontSize="15" text="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'spended')}" />
+								<s:Label fontWeight="bold" fontSize="15" text="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'total')}" />
+							</s:HGroup>
+							
+							<s:HGroup>
+								
+								<s:VGroup gap="15" verticalAlign="middle" height="100%">
+									<s:Label fontWeight="bold" fontSize="15" text="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'phone')}:"/>
+									<s:Label fontWeight="bold" fontSize="15" text="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'internet')}:"/>
+									<s:Label fontWeight="bold" fontSize="15" text="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'carAmortization')}:"/>
+									<s:Label fontWeight="bold" fontSize="15" text="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'gas')}:"/>
+								</s:VGroup>
+								
+								<s:VGroup>
+									
+									<s:HGroup>
+										<s:TextInput id="employee_costs_and_stimulations_phone_limit" />
+										<s:TextInput id="employee_costs_and_stimulations_phone_cost" />
+										<s:TextInput id="employee_costs_and_stimulations_phone_total" enabled="false" />
+									</s:HGroup>
+									
+									<s:HGroup>
+										<s:TextInput id="employee_costs_and_stimulations_internet_limit" />
+										<s:TextInput id="employee_costs_and_stimulations_internet_cost" />
+										<s:TextInput id="employee_costs_and_stimulations_internet_total" enabled="false"/>
+									</s:HGroup>
+									
+									<s:HGroup>
+										<s:TextInput id="employee_costs_and_stimulations_car_amortization_limit" />
+										<s:TextInput id="employee_costs_and_stimulations_car_amortization_cost" />
+										<s:TextInput id="employee_costs_and_stimulations_car_amortization_total" enabled="false" />
+									</s:HGroup>
+									
+									<s:HGroup>
+										<s:TextInput id="employee_costs_and_stimulations_gas_limit" />
+										<s:TextInput id="employee_costs_and_stimulations_gas_cost" />
+										<s:TextInput id="employee_costs_and_stimulations_gas_total" enabled="false" />
+									</s:HGroup>
+									
+								</s:VGroup>
+								
+							</s:HGroup>
+							
+						</s:VGroup>
+						
+						<s:VGroup id="stimlationGroup" paddingLeft="10" paddingTop="20">
+							
+							<s:HGroup width="100%" horizontalAlign="center" gap="100" paddingLeft="30">
+								<s:Label fontWeight="bold" fontSize="15" text="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'type')}" />
+								<s:Label fontWeight="bold" fontSize="15" text="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'amount')}" />
+								<s:Label fontWeight="bold" fontSize="15" text="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'percent')}" />
+							</s:HGroup>
+							
+							<s:HGroup>
+								
+								<s:VGroup gap="15" verticalAlign="middle" height="100%">
+									<s:Label fontWeight="bold" fontSize="15" text="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'stimulation')}:"/>
+									<s:Label fontWeight="bold" fontSize="15" text="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'destimulation')}:"/>
+								</s:VGroup>
+								
+								<s:VGroup>
+									<s:HGroup>
+										<s:ComboBox id="employee_costs_and_stimulations_bonus_type" requireSelection="true" labelToItemFunction="{ FormHelper.disableLabelToItemFunction }"/>
+										<s:TextInput id="employee_costs_and_stimulations_bonus_number"/>
+										<s:TextInput id="employee_costs_and_stimulations_bonus_percent"/>
+									</s:HGroup>
+									
+									<s:HGroup>
+										<s:ComboBox id="employee_costs_and_stimulations_penalty_type" requireSelection="true"  labelToItemFunction="{ FormHelper.disableLabelToItemFunction }"/>
+										<s:TextInput id="employee_costs_and_stimulations_penalty_number" />
+										<s:TextInput id="employee_costs_and_stimulations_penalty_percent"/>
+									</s:HGroup>
+								
+								</s:VGroup>
+								
+							</s:HGroup>
+							
+						</s:VGroup>
+					
+						
+						<s:HGroup id="controllGroup" paddingTop="20" paddingLeft="10">
+							
+							<Button:DesktopControllButton id="saveButton"
+														  toolTip="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'save')}"  
+														  icon="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.systemIconsResourceName, 'saveIcon', this.session.skinsLocaleName )}" 
+														  skinClass="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.skinsResourceName, 'desktopButton', this.session.skinsLocaleName ) }"/>
+							
+							<Button:DesktopControllButton id="resetButton" 
+														  toolTip="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'reset')}"  
+														  icon="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.systemIconsResourceName, 'clearIcon', this.session.skinsLocaleName )}" 
+														  skinClass="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.skinsResourceName, 'desktopButton', this.session.skinsLocaleName ) }"/>
+							
+						</s:HGroup>
+						
+					</s:VGroup>
+				
+					
+					
+				</Group:LoadingContainer>
+			
+			</Group:ModuleNotification>
+			
+		</s:Group>
+		
+	</s:Scroller>
+	
+</ui:SkinBase>
+

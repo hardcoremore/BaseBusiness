@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" 
+			   minWidth="955" minHeight="600"
+			   preloader="Preloader" 
+			   creationComplete="creationComplete( event )" 
+			   xmlns:Button="com.desktop.ui.Components.Button.*" 
+			   backgroundColor="#bde8ff">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	
+	<fx:Style source="skins/Default/css/Main.css" />
+	
+	<fx:Script>
+		<![CDATA[
+			import apps.MainApplication;
+			
+			import com.desktop.system.Application.Library.ui.HorizontalDivideBox;
+			import com.desktop.system.events.ResourceEvent;
+			import com.desktop.system.interfaces.IConfig;
+			import com.desktop.ui.Components.Button.Icon;
+			import com.desktop.ui.Components.Group.LoadingContainer;
+			import com.desktop.ui.Components.Group.ModuleNotification;
+			import com.desktop.ui.Components.Window.DesktopNotification;
+			import com.desktop.ui.Components.Window.DesktopWindow;
+			
+			import components.DataGridColumnSelector;
+			import components.Paging;
+			import components.app.SaveData;
+			import components.app.WorkDayForm;
+			
+			import config.LocalConfig;
+			
+			import factories.ConfigFactory;
+			
+			import flash.net.registerClassAlias;
+			import flash.utils.clearInterval;
+			import flash.utils.getDefinitionByName;
+			import flash.utils.setInterval;
+			import flash.utils.setTimeout;
+			
+			import interfaces.modules.IConfigModule;
+			import interfaces.modules.ICustomersModule;
+			import interfaces.modules.IStorageModule;
+			import interfaces.modules.sub.ICustomersConfigModule;
+			import interfaces.modules.sub.IEmployeeCostsAndStimulationsModule;
+			import interfaces.modules.sub.IEmployeeEconomicsModule;
+			import interfaces.modules.sub.IEmployeeSalaryModule;
+			import interfaces.modules.sub.IEmployeeWorkSheetModule;
+			import interfaces.modules.sub.IEmployeeWorkingScenarioModule;
+			import interfaces.modules.sub.IEmployeesConfigModule;
+			import interfaces.modules.sub.ISaveCustomerModule;
+			import interfaces.modules.sub.ISaveEmployeeModule;
+			import interfaces.modules.sub.ISaveItemModule;
+			import interfaces.modules.sub.ISaveUserModule;
+			import interfaces.modules.sub.IStorageInputModule;
+			import interfaces.modules.sub.IStorageItemCategoriesModule;
+			import interfaces.modules.sub.IStoragesModule;
+			
+			import mx.collections.ArrayCollection;
+			import mx.collections.ArrayList;
+			import mx.containers.ViewStack;
+			import mx.controls.Alert;
+			import mx.controls.ColorPicker;
+			import mx.controls.DataGrid;
+			import mx.controls.DateField;
+			import mx.core.IVisualElement;
+			import mx.events.FlexEvent;
+			import mx.events.ResizeEvent;
+			import mx.events.ResourceEvent;
+			import mx.managers.HistoryManager;
+			import mx.managers.PopUpManager;
+			import mx.messaging.config.ConfigMap;
+			import mx.messaging.messages.AcknowledgeMessage;
+			import mx.messaging.messages.AcknowledgeMessageExt;
+			import mx.messaging.messages.AsyncMessage;
+			import mx.messaging.messages.AsyncMessageExt;
+			import mx.messaging.messages.CommandMessage;
+			import mx.messaging.messages.CommandMessageExt;
+			import mx.messaging.messages.ErrorMessage;
+			import mx.messaging.messages.HTTPRequestMessage;
+			import mx.messaging.messages.MessagePerformanceInfo;
+			
+			import skins.Default.MainApplicationSkin;
+			import skins.Default.WhiteFormItemSkin;
+			
+			import spark.components.CheckBox;
+			import spark.components.ComboBox;
+			import spark.components.Form;
+			import spark.components.FormItem;
+			import spark.components.HSlider;
+			import spark.components.Label;
+			import spark.components.RadioButtonGroup;
+			import spark.components.SkinnableContainer;
+			import spark.components.TextArea;
+			import spark.components.ToggleButton;
+			import spark.components.VSlider;
+			import spark.components.gridClasses.GridColumn;
+			import spark.events.IndexChangeEvent;
+			import spark.skins.spark.ToggleButtonSkin;
+			
+			private var __styleManager:IStyleManager2;
+			
+			public function creationComplete( event:FlexEvent ):void
+			{	
+				
+				GridColumn;
+				MainApplicationSkin;
+				WhiteFormItemSkin;
+				SaveData;
+				ModuleNotification;
+				WorkDayForm;
+				
+				Alert;
+				HistoryManager;
+				ArrayCollection;
+				ConfigMap;
+				AcknowledgeMessage;
+				AcknowledgeMessageExt;
+				AsyncMessage;
+				AsyncMessageExt;
+				CommandMessage;
+				CommandMessageExt;
+				ErrorMessage;
+				HTTPRequestMessage;
+				MessagePerformanceInfo;
+				PopUpManager;
+				Icon;
+				DesktopWindow;
+				Label;
+				ColorPicker;
+				HSlider;
+				VSlider;
+				ComboBox;
+				CheckBox;
+				DesktopNotification;
+				DesktopControllButton;
+				LoadingContainer;
+				DataGrid;
+				HorizontalDivideBox;
+				ArrayList;
+				SkinnableContainer;
+				Paging;
+				DateField;
+				Form;
+				TextArea;
+				RadioButtonGroup;
+				ViewStack;
+				DataGridColumnSelector;
+				
+				/********************************
+				 * 
+				 * MODULE INTERFACES
+				 * 
+				 *******************************/
+				
+				ICustomersModule;
+				ISaveCustomerModule;
+				
+				IConfigModule;
+				
+				
+				IEmployeeEconomicsModule;
+				ISaveEmployeeModule;
+				IEmployeeWorkingScenarioModule;
+				IEmployeeWorkSheetModule;
+				IEmployeeSalaryModule;
+				IEmployeesConfigModule;
+				IEmployeeCostsAndStimulationsModule;
+				ICustomersConfigModule;
+				ISaveItemModule;
+				IStorageModule;
+				IStoragesModule;
+				IStorageItemCategoriesModule;
+				IStorageInputModule;
+				ISaveUserModule;
+				
+				
+				//  END OF MODULE INTERFACES
+				
+				var main:MainApplication = new MainApplication( ConfigFactory.createLocalConfig(), this );
+					main.initializeApplication();
+			}
+			
+			
+			
+		]]>
+	</fx:Script>
+	
+	<s:TextInput width="0" height="0" visible="false"  />
+	<s:Button width="0" height="0" visible="false" />
+	<s:ToggleButton width="0" height="0" visible="false" />
+	<mx:Accordion width="0" height="0" visible="false" />
+	<Button:DesktopControllButton width="0" height="0" visible="false"/>
+	
+</s:Application>

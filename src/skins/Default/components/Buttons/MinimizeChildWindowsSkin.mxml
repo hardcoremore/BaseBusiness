@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:SkinBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				  xmlns:s="library://ns.adobe.com/flex/spark"
+				  alpha.disabled="0.5"
+				  xmlns:Library="com.desktop.system.Application.Library.*"
+				  xmlns:ui="com.desktop.system.Application.Library.ui.*">
+	
+	<!-- host component -->
+	<fx:Metadata>
+		<![CDATA[ 
+		[HostComponent("spark.components.Button")]
+		]]>
+	</fx:Metadata>
+	
+	
+	
+	<!-- states -->
+	<ui:states>
+		<s:State name="up"  />
+		<s:State name="over" />
+		<s:State name="down" />
+		<s:State name="disabled" />
+	</ui:states>
+	
+	<s:BitmapImage source="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.systemIconsResourceName, 'minimizeChildWindowsNormal', this.session.skinsLocaleName )}"
+				   source.over="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.systemIconsResourceName, 'minimizeChildWindowsOver', this.session.skinsLocaleName )}"
+				   source.down="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.systemIconsResourceName, 'minimizeChildWindowsDown', this.session.skinsLocaleName )}"/>
+	
+</ui:SkinBase>

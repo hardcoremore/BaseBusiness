@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:SkinBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			 xmlns:s="library://ns.adobe.com/flex/spark" 
+			 xmlns:fb="http://ns.adobe.com/flashbuilder/2009" 
+			 alpha.disabled="0.5"  
+			 xmlns:Library="com.desktop.system.Application.Library.*" 
+			 xmlns:Button="com.desktop.ui.Components.Button.*"
+			 xmlns:ui="com.desktop.system.Application.Library.ui.*"
+			 xmlns:Group="com.desktop.ui.Components.Group.*" 
+			 xmlns:mx="library://ns.adobe.com/flex/mx" 
+			 xmlns:app="components.app.*">
+	
+	<fx:Metadata>[HostComponent("interfaces.modules.sub.IEmployeeSalaryModule")]</fx:Metadata>
+
+	<ui:states>
+		<s:State name="normal" />
+		<s:State name="disabled" />
+	</ui:states>
+	
+	<s:Scroller id="scroller" top="0" left="0" bottom="0" right="0" skinClass="spark.skins.spark.ScrollerSkin">
+		
+		<s:Group id="contentGroup" minWidth="0" minHeight="0" top="0" bottom="0" right="0" left="0">
+			
+			<Group:ModuleNotification id="notifier" width="100%" height="100%"
+									  minHeight="300"
+									  minWidth="500"
+									  skinClass="skins.Default.components.Group.ModuleNotificationSkin">
+				
+				<Group:LoadingContainer id="loadingContainer" width="100%" height="100%"
+										skinClass="skins.Default.components.Group.LoadingContainerSkin">
+				
+					<s:HGroup gap="1" width="100%" height="100%">
+						
+						
+						
+					</s:HGroup>
+				
+				</Group:LoadingContainer>
+			
+			</Group:ModuleNotification>
+			
+		</s:Group>
+		
+	</s:Scroller>
+	
+</ui:SkinBase>
+

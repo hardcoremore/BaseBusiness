@@ -1,0 +1,24 @@
+﻿
+# languages
+mxmlc -locale=sr_RS -source-path=C:\Adobe_Flash_Builder_Work_Space\BaseBusiness\locale\sr_RS -include-resource-bundles=base,messages,modules,core,effects,containers,skins,styles,components,SharedResources,collections,effects,layout,sparkEffects,textLayout -output C:\Adobe_Flash_Builder_Work_Space\BaseBusiness\src\resourceModules\locale\sr_RS_LocaleResourceModule.swf
+
+mxmlc -locale=en_US -source-path=C:\Adobe_Flash_Builder_Work_Space\BaseBusiness\locale\en_US -include-resource-bundles=base,messages,modules,core,effects,containers,skins,styles,components,SharedResources,collections,effects,layout,sparkEffects,textLayout -output C:\Adobe_Flash_Builder_Work_Space\BaseBusiness\src\resourceModules\locale\en_US_LocaleResourceModule.swf
+
+
+#skins
+mxmlc -locale=Default_skinClasses -source-path=C:\Adobe_Flash_Builder_Work_Space\BaseBusiness\locale\Default_skinClasses,C:\Adobe_Flash_Builder_Work_Space\BaseBusiness\src,C:\Users\Chaky\AS3Libraries\Desktop\src,C:\Users\Chaky\AS3Libraries\TweenLite\src -include-resource-bundles=skinClasses -output C:\Adobe_Flash_Builder_Work_Space\BaseBusiness\src\resourceModules\skins\Default_SkinResourceModule.swf
+
+
+
+#icons
+mxmlc -locale=Default_skinClasses -source-path=C:\Adobe_Flash_Builder_Work_Space\BaseBusiness\locale\Default_skinClasses -include-resource-bundles=systemIconClasses -output C:\Adobe_Flash_Builder_Work_Space\BaseBusiness\src\resourceModules\skins\Default_SystemIconsResourceModule.swf
+
+
+
+
+mxmlc -locale=Default_skinClasses -source-path=C:\Adobe_Flash_Builder_Work_Space\BaseBusiness\locale\Default_skinClasses -include-resource-bundles=modulesIconsClasses -output
+ C:\Adobe_Flash_Builder_Work_Space\BaseBusiness\src\resourceModules\skins\Default_ModuleIconsResourceModule.swf
+
+
+
+mxmlc -locale= -source-path=C:\Adobe_Flash_Builder_Work_Space\BaseBusiness\locale\Default_skinClasses,C:\Adobe_Flash_Builder_Work_Space\BaseBusiness\src,C:\Users\Chaky\AS3Libraries\Desktop\src,C:\Users\Chaky\AS3Libraries\TweenLite\src -resource-bundle-list=C:\Adobe_Flash_Builder_Work_Space\BaseBusiness\src\resourceModules\skins\AssocitesSkinResourceBundleList.txt C:\Adobe_Flash_Builder_Work_Space\BaseBusiness\src\skins\Default\modules\AssociatesSkin.mxml

@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+
+    ADOBE SYSTEMS INCORPORATED
+    Copyright 2008 Adobe Systems Incorporated
+    All Rights Reserved.
+    
+    NOTICE: Adobe permits you to use, modify, and distribute this file
+    in accordance with the terms of the license agreement accompanying it.
+
+-->
+
+<!--- The default skin class for a Spark TitleWindow container.  
+
+     @see spark.skins.spark.TitleWindowCloseButtonSkin
+     @see spark.components.TitleWindow
+
+     @langversion 3.0
+     @playerversion Flash 10
+     @playerversion AIR 1.5
+     @productversion Flex 4
+-->
+<ui:SkinBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			 xmlns:s="library://ns.adobe.com/flex/spark"
+			 xmlns:mx="library://ns.adobe.com/flex/mx"
+    		 xmlns:fb="http://ns.adobe.com/flashbuilder/2009" 
+			 xmlns:Library="com.desktop.system.Application.Library.*"
+			 blendMode="normal" 
+			 mouseEnabled="false"
+    		 minWidth="{ windowButtonsGroup.width + ( getStyle( 'borderThickness' ) as Number ) }" 
+			 minHeight="30" 
+			 alpha.disabled="0.5" 
+			 alpha.disabledWithControlBar="0.5" 
+			 xmlns:ui="com.desktop.system.Application.Library.ui.*">
+	
+	<fx:Metadata>[HostComponent("com.desktop.ui.Components.Window.DesktopNotification")]</fx:Metadata>
+    
+	<fx:Script>
+		<![CDATA[
+			
+
+			override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
+			{	
+				var bt:Number = getStyle('borderThickness');
+				
+				if( hostComponent.maximizable == false )
+				{	
+					windowButtonsGroup.width =  closeButton.width;
+			
+					windowButtonsGroup.right =  bt;
+				}
+				
+				titleIcon.source = hostComponent.titleBarIcon;
+				
+				topGroup.height = titleDisplay.height + ( titleDisplay.height / 2 );
+				
+				
+				if( topGroup.height < windowButtonsGroup.height + 4 )
+				{
+					topGroup.height = windowButtonsGroup.height + 4;
+				}
+				
+				super.updateDisplayList(unscaledWidth, unscaledHeight);
+			}
+			
+			override protected function initializationComplete():void
+			{
+				//useChromeColor = true; ??? this is available in SparkSkin class but not in Skin class
+				
+				super.initializationComplete();
+				
+			}
+			
+
+			protected function buttons_mouseOverHandler(event:MouseEvent):void
+			{
+				event.target.parent.setElementIndex( event.target, event.target.parent.numChildren - 1);
+			}
+
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<s:GlowFilter alpha="1" blurX="4" blurY="4" strength="1"  color="0" quality="3" id="contentGlowFilter"/>
+	</fx:Declarations>
+	
+    <ui:states>
+        <s:State name="normal" stateGroups="activeGroup, normalGroup"/>
+		<s:State name="maximized" stateGroups="activeGroup, maximizedGroup"/>
+		<s:State name="minimized" stateGroups="activeGroup"/>
+		
+		<s:State name="maximizedInactive" stateGroups="inactiveGroup, maximizedGroup" />
+		<s:State name="normalInactive" stateGroups="inactiveGroup, normalGroup" />
+		<s:State name="minimizedInactive" stateGroups="inactiveGroup, maximizedGroup" />
+		<s:State name="inactive" stateGroups="inactiveGroup" />
+		<s:State name="hiddenInactive" stateGroups="inactiveGroup" />
+		
+        <s:State name="disabled" />
+        <s:State name="normalWithControlBar" stateGroups="withControls" />
+        <s:State name="inactiveWithControlBar" stateGroups="withControls, inactiveGroup" />
+        <s:State name="disabledWithControlBar" stateGroups="withControls" />
+    </ui:states>
+	
+    <s:Group id="allContentGroup" left="0" right="0" top="0" bottom="0">
+		
+		<!--- drop shadow can't be hittable so it stays sibling of other graphics @private-->
+		<s:RectangularDropShadow id="dropShadow" 
+								 blurX="22" 
+								 blurY="20" 
+								 
+								 alpha.normal=".43"
+								 distance.normal="10"
+								 alpha.normalInactive=".25"
+								 
+								 alpha.maximized="0"
+								 distance.maximized="0"
+								 alpha.maximizedInactive="0"
+								 
+								 distance.inactive="7"
+								 distance.maximizedInactive="0"
+								 distance.normalInactive="7"
+								 
+								 angle="90" 
+								 color="0" 
+								 left="0" 
+								 top="0" 
+								 right="0" 
+								 bottom="0"
+								 blendMode="normal"
+								 
+								 brRadius.normalGroup="{getStyle('cornerRadius') + 1}"
+								 blRadius.normalGroup="{getStyle('cornerRadius') + 1}"
+								 tlRadius.normalGroup="{getStyle('cornerRadius') + 1}"
+								 trRadius.normalGroup="{getStyle('cornerRadius') + 1}"
+								 
+								 trRadius.maximizedGroup="0"
+								 tlRadius.maximizedGroup="0"
+								 brRadius.maximizedGroup="0"
+								 blRadius.maximizedGroup="0"
+								 
+								 />
+		
+		<s:Rect width="100%" height="100%"
+				radiusX.normalGroup="{getStyle('cornerRadius')}"
+				radiusY.normalGroup="{getStyle('cornerRadius')}"
+				radiusX.maximizedGroup="0"
+				radiusY.maximizedGroup="0">
+		
+			<s:stroke>
+				<s:SolidColorStroke color="{getStyle('borderColor')}"/>
+			</s:stroke>
+			
+		</s:Rect>
+		
+        <!-- layer 3: contents -->
+        <!--- Contains the vertical stack of title bar content and control bar. -->
+        <s:Group left="0" right="0" top="0" bottom="0" id="contents">
+            <s:layout>
+                <s:VerticalLayout gap="0" horizontalAlign="justify" />
+            </s:layout>
+            <!--- @private -->
+            <s:Group id="topGroup">
+                
+                <!--- layer 0: title bar fill @private -->
+                <s:Rect id="tbFill" 
+						left="0" 
+						right="0" 
+						top="0" 
+						bottom="0" 
+						
+						topLeftRadiusX.normalGroup="{getStyle('cornerRadius')}"
+						topLeftRadiusY.normalGroup="{getStyle('cornerRadius')}"
+						topRightRadiusX.normalGroup="{getStyle('cornerRadius')}"
+						topRightRadiusY.normalGroup="{getStyle('cornerRadius')}"
+						
+						topLeftRadiusX.maximizedGroup="0"
+						topLeftRadiusY.maximizedGroup="0"
+						topRightRadiusX.maximizedGroup="0"
+						topRightRadiusY.maximizedGroup="0"
+						
+						
+						topLeftRadiusX="{getStyle('cornerRadius')}"
+						topLeftRadiusY="{getStyle('cornerRadius')}"
+						topRightRadiusX="{getStyle('cornerRadius')}"
+						topRightRadiusY="{getStyle('cornerRadius')}"
+						
+						bottomLeftRadiusX="0"
+						bottomLeftRadiusY="0"
+						bottomRightRadiusX="0"
+						bottomRightRadiusY="0">
+					
+                    <s:fill>
+                        <s:LinearGradient rotation="90">
+							
+                            <s:GradientEntry color="{getStyle('borderColor')}"
+											 alpha.normal="{getStyle('borderAlpha')}"
+											 alpha.maximized="{getStyle('borderAlpha')}"
+											 alpha.inactiveGroup=".3" />
+							
+                            <s:GradientEntry color="{getStyle('borderColor')}" 
+											 alpha.normal="{getStyle('borderAlpha')}"
+											 alpha.maximized="{getStyle('borderAlpha')}"
+											 alpha.inactiveGroup=".3" />
+											 
+							
+                        </s:LinearGradient>
+                    </s:fill>
+					
+                </s:Rect>
+                
+				<s:BitmapImage id="titleIcon" 
+							   y="{ topGroup.height / 2 - titleIcon.height / 2}"
+							   x="{getStyle('borderThickness')}"  
+							   width="{ topGroup.height - 4 }" 
+							   height="{ topGroup.height - 4 }"
+							   smooth="true"/>
+				
+               <!-- layer 3: text -->
+                <!--- @copy spark.components.Panel#titleDisplay -->
+                <s:Label id="titleDisplay"
+						 x="{ titleIcon.x + titleIcon.width + getStyle('borderThickness')  }"
+						 y="{ topGroup.height / 2 - titleDisplay.height / 2}"
+						 maxDisplayedLines="1"	                        
+						 minHeight="10"
+                         verticalAlign="middle" 
+						 filters="{[new spark.filters.GlowFilter(0, .8, 3.9, 3.9, 1.2, 1)]}"  
+						 fontSize="{getStyle( 'fontSize' )}" 
+						 color="#FFFFFF"/>
+				
+				
+                
+                
+                <!-- layer 4: moveArea -->
+                <!--- @copy spark.components.TitleWindow#moveArea -->
+                <s:Group id="moveArea" left="0"  right="0" top="0" bottom="0" />
+                
+				<s:Group id="windowButtonsGroup"
+						  right="{getStyle('borderThickness')}" 
+						  top="0" 
+						  width="{  closeButton.width }">  
+					   
+						<s:Button  x="0" id="closeButton" skinClass.normal="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.skinsResourceName, 'closeButton', this.session.skinsLocaleName ) }"
+								  				   skinClass.disabled="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.skinsResourceName, 'closeButton', this.session.skinsLocaleName ) }"
+												   skinClass.maximized="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.skinsResourceName, 'closeButton', this.session.skinsLocaleName ) }"
+												   skinClass.inactiveGroup="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.skinsResourceName, 'closeButtonInactive', this.session.skinsLocaleName ) }"
+												   mouseOver="buttons_mouseOverHandler(event)"
+												   alpha.inactiveGroup=".97"
+							   	   />
+ 				</s:Group>
+                <!--- @copy spark.components.TitleWindow#closeButton -->
+            </s:Group>
+        </s:Group>
+		
+		
+		<!--- layer 1: border @private -->
+		<s:Rect id="border" 
+				top="{moveArea.height - 1}" 
+				left="0" 
+				right="0" 
+				bottom="0"
+				
+				bottomLeftRadiusX.normalGroup="{getStyle('cornerRadius')}"
+				bottomLeftRadiusY.normalGroup="{getStyle('cornerRadius')}"
+				bottomRightRadiusX.normalGroup="{getStyle('cornerRadius')}"
+				bottomRightRadiusY.normalGroup="{getStyle('cornerRadius')}"
+				
+				bottomLeftRadiusX.maximizedGroup="0"
+				bottomLeftRadiusY.maximizedGroup="0"
+				bottomRightRadiusX.maximizedGroup="0"
+				bottomRightRadiusY.maximizedGroup="0"
+			
+				topLeftRadiusX="0"
+				topLeftRadiusY="0"
+				topRightRadiusX="0"
+				topRightRadiusY="0"
+				
+				bottomLeftRadiusX="{getStyle('cornerRadius')}"
+				bottomLeftRadiusY="{getStyle('cornerRadius')}"
+				bottomRightRadiusX="{getStyle('cornerRadius')}"
+				bottomRightRadiusY="{getStyle('cornerRadius')}">
+			
+			<s:stroke>
+					<s:SolidColorStroke id="borderStroke" 
+										color="{ getStyle( 'borderColor' ) }" 
+										alpha.normal="{getStyle('borderAlpha')}"
+										alpha.maximized="{getStyle('borderAlpha')}"
+										alpha.inactiveGroup=".3"
+										weight="{ getStyle('borderThickness') }"/>	
+			</s:stroke>
+		</s:Rect>
+		
+		
+		<!--- layer 1: border @private -->
+		<s:Rect id="borderOutline" 
+				top="0" 
+				left="0" 
+				right="0" 
+				bottom="0"
+				
+				topLeftRadiusX.normalGroup="{getStyle('cornerRadius')}"
+				topLeftRadiusY.normalGroup="{getStyle('cornerRadius')}"
+				topRightRadiusX.normalGroup="{getStyle('cornerRadius')}"
+				topRightRadiusY.normalGroup="{getStyle('cornerRadius')}"
+				
+				
+				bottomLeftRadiusX.normalGroup="{getStyle('cornerRadius')}"
+				bottomLeftRadiusY.normalGroup="{getStyle('cornerRadius')}"
+				bottomRightRadiusX.normalGroup="{getStyle('cornerRadius')}"
+				bottomRightRadiusY.normalGroup="{getStyle('cornerRadius')}"
+				
+				
+				topLeftRadiusX.maximizedGroup="0"
+				topLeftRadiusY.maximizedGroup="0"
+				topRightRadiusX.maximizedGroup="0"
+				topRightRadiusY.maximizedGroup="0"
+				
+				bottomLeftRadiusX.maximizedGroup="0"
+				bottomLeftRadiusY.maximizedGroup="0"
+				bottomRightRadiusX.maximizedGroup="0"
+				bottomRightRadiusY.maximizedGroup="0"
+				
+				>
+			<s:stroke>
+				<!--- Defines the TitleWindowSkin class's border stroke. The default value is 1. -->
+				<s:SolidColorStroke id="borderOutlineStroke" weight="1"  color="#FFFFFF"  alpha="{getStyle('borderAlpha') / 3.5}" alpha.inactiveGroup=".3"/>
+			</s:stroke>
+			
+			
+			
+		</s:Rect>
+		
+		<!-- layer 2: background fill -->
+		<!--- Defines the appearance of the TitleWindowSkin class's background. -->
+		<s:Rect id="background" 
+				left="{getStyle('borderThickness')}" 
+				filters="{[contentGlowFilter]}"
+				right="{getStyle('borderThickness')}"
+				top="{topGroup.height}"
+				bottom="{getStyle('borderThickness')}">
+			<s:fill>
+				<!--- Defines the TitleWindowSkin class's background fill. The default color is 0xFFFFFF. -->
+				<s:SolidColor id="backgroundFill" color="{ getStyle('backgroundColor') }" alpha="{ getStyle( 'backgroundAlpha' ) }" />
+			</s:fill>
+		</s:Rect>
+		
+		<!--
+		Note: setting the minimum size to 0 here so that changes to the host component's
+		size will not be thwarted by this skin part's minimum size.   This is a compromise,
+		more about it here: http://bugs.adobe.com/jira/browse/SDK-21143
+		-->
+		<!--- @copy spark.components.SkinnableContainer#contentGroup -->
+		<s:Scroller  id="scroller" 
+					 width="100%" 
+					 height="100%"  
+					 top="{topGroup.height + 2}"
+					 bottom="{getStyle('borderThickness') + 2}" 
+					 right="{getStyle('borderThickness') + 2}" 
+					 left="{getStyle('borderThickness') + 2}">
+			
+			<s:Group id="contentGroup" width="100%" height="100%" minWidth="0" minHeight="0"> 
+				<s:TextArea id="bodyText" 
+							width="100%"
+							height="100" 
+							fontSize="18" 
+							editable="false"
+							selectable="false"
+							textAlign="center" 
+							verticalAlign="middle"/>
+			</s:Group>
+			
+		</s:Scroller>
+			
+    </s:Group>
+	
+	
+</ui:SkinBase>

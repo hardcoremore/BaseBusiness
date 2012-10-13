@@ -1,0 +1,68 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+@namespace components "components.*";
+@namespace DesktopButton "com.desktop.ui.Components.Button.*";
+@namespace Components "com.desktop.ui.Components.*";
+@namespace NavBars "com.desktop.ui.Components.NavBars.*";
+@namespace Window "com.desktop.ui.Components.Window.*";
+
+
+s|ToggleButton
+{
+}
+
+s|TextInput
+{
+}
+
+components|Paging
+{
+}
+
+mx|ToolTip
+{
+}
+
+NavBars|TaskBar
+{
+}
+
+NavBars|DesktopButtonBar
+{
+}
+
+Components|DesktopComponent
+{
+}
+
+Window|DesktopWindow
+{	
+}
+
+Window|DesktopNotification
+{
+	
+}
+
+DesktopButton|Icon
+{
+}
+
+mx|Accordion
+{
+	
+}
+
+DesktopButton|DesktopControllButton
+{
+}
+global
+{
+}
+
+
+

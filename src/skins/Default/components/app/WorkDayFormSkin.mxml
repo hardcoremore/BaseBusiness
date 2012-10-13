@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:SkinBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			 xmlns:s="library://ns.adobe.com/flex/spark" 
+			 xmlns:mx="library://ns.adobe.com/flex/mx"
+			 xmlns:Library="com.desktop.system.Application.Library.*" 
+			 xmlns:Button="com.desktop.ui.Components.Button.*" 
+			 xmlns:ui="com.desktop.system.Application.Library.ui.*">
+	<fx:Script>
+		<![CDATA[
+			import com.desktop.system.Application.Library.ui.FormHelper;
+			
+			protected function employees_work_day_first_shift_changeHandler(event:Event):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Metadata>[HostComponent("components.app.WorkDayForm")]</fx:Metadata>
+	
+	<ui:states>
+		<s:State name="normal" />
+		<s:State name="workSheet" />
+		<s:State name="disabled" />
+	</ui:states>
+
+	<s:Form skinClass="spark.skins.spark.FormSkin" id="dayForm">
+		
+		<s:FormItem skinClass="spark.skins.spark.FormItemSkin" height="0" visible="false">
+			<s:TextInput id="row_id" editable="false" />
+		</s:FormItem>
+		
+		<s:FormItem  label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'day') }: " skinClass="spark.skins.spark.FormItemSkin">
+			<s:ComboBox id="employees_work_day" />
+		</s:FormItem>
+		
+		<s:FormItem  label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'type') }: " skinClass="spark.skins.spark.FormItemSkin">
+			<s:ComboBox id="employees_work_day_type" labelToItemFunction="{FormHelper.disableLabelToItemFunction}" />
+		</s:FormItem>
+		
+		<s:FormItem  label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'firstShift') }: " skinClass="spark.skins.spark.FormItemSkin">
+			<s:CheckBox id="employees_work_day_first_shift" selected="false"/>
+		</s:FormItem>
+		
+		<s:FormItem  label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'starts') }: " skinClass="spark.skins.spark.FormItemSkin">
+			<s:HSlider id="employees_first_shift_start"
+					   minimum="0" 
+					   maximum="1440"
+					   snapInterval="5"
+					   width="200"
+					   enabled="false"
+					   dataTipFormatFunction="{ FormHelper.totalMinutesToHoursMinutesString }"
+					   skinClass="spark.skins.spark.HSliderSkin" />
+		</s:FormItem>
+		
+		<s:FormItem  label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'ends') }: " skinClass="spark.skins.spark.FormItemSkin">
+			<s:HSlider id="employees_first_shift_end" 
+					   minimum="0" 
+					   maximum="1440"
+					   snapInterval="5"
+					   width="200"
+					   enabled="false"
+					   dataTipFormatFunction="{ FormHelper.totalMinutesToHoursMinutesString }"
+					   skinClass="spark.skins.spark.HSliderSkin" />
+		</s:FormItem>
+		
+		<s:FormItem  label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'overtime') }: " 
+					 skinClass="spark.skins.spark.FormItemSkin"
+					 includeIn="workSheet">
+			<s:HSlider id="employee_work_day_first_shift_overtime" 
+					   minimum="0" 
+					   maximum="1440"
+					   snapInterval="5"
+					   width="200"
+					   enabled="false"
+					   dataTipFormatFunction="{ FormHelper.totalMinutesToHoursMinutesString }"
+					   skinClass="spark.skins.spark.HSliderSkin" />
+		</s:FormItem>
+		
+		<s:FormItem  label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'secondShift') }: " skinClass="spark.skins.spark.FormItemSkin">
+			<s:CheckBox id="employees_work_day_second_shift" selected="false"/>
+		</s:FormItem>
+		
+		
+		<s:FormItem label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'starts') }: " skinClass="spark.skins.spark.FormItemSkin">
+			<s:HSlider id="employees_second_shift_start" 
+					   minimum="0" 
+					   maximum="1440"
+					   snapInterval="5"
+					   width="200"
+					   enabled="false"
+					   dataTipFormatFunction="{ FormHelper.totalMinutesToHoursMinutesString }"
+					   skinClass="spark.skins.spark.HSliderSkin" />
+		</s:FormItem>
+		
+		<s:FormItem label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'ends') }: " skinClass="spark.skins.spark.FormItemSkin">
+			<s:HSlider id="employees_second_shift_end" 
+					   minimum="0" 
+					   maximum="1440"
+					   snapInterval="5"
+					   width="200"
+					   enabled="false"
+					   dataTipFormatFunction="{ FormHelper.totalMinutesToHoursMinutesString }"
+					   skinClass="spark.skins.spark.HSliderSkin" />
+		</s:FormItem>
+		
+		<s:FormItem  label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'overtime') }: " 
+					 skinClass="spark.skins.spark.FormItemSkin"
+					 includeIn="workSheet">
+			<s:HSlider id="employee_work_day_second_shift_overtime" 
+					   minimum="0" 
+					   maximum="1440"
+					   snapInterval="5"
+					   width="200"
+					   enabled="false"
+					   dataTipFormatFunction="{ FormHelper.totalMinutesToHoursMinutesString }"
+					   skinClass="spark.skins.spark.HSliderSkin" />
+		</s:FormItem>
+		
+		<s:FormItem  label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'thirdShift') }: " skinClass="spark.skins.spark.FormItemSkin">
+			<s:CheckBox id="employees_work_day_third_shift" selected="false"/>
+		</s:FormItem>
+		
+		<s:FormItem label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'starts') }: " skinClass="spark.skins.spark.FormItemSkin">
+			<s:HSlider id="employees_third_shift_start" 
+					   minimum="0" 
+					   maximum="1440"
+					   snapInterval="5"
+					   width="200"
+					   enabled="false"
+					   dataTipFormatFunction="{ FormHelper.totalMinutesToHoursMinutesString }"
+					   skinClass="spark.skins.spark.HSliderSkin" />
+		</s:FormItem>
+		
+		<s:FormItem label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'ends') }: " skinClass="spark.skins.spark.FormItemSkin">
+			<s:HSlider id="employees_third_shift_end" 
+					   minimum="0" 
+					   maximum="1440"
+					   snapInterval="5"
+					   width="200"
+					   enabled="false"
+					   dataTipFormatFunction="{ FormHelper.totalMinutesToHoursMinutesString }"
+					   skinClass="spark.skins.spark.HSliderSkin" />
+		</s:FormItem>
+		
+		<s:FormItem  label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'overtime') }: " 
+					 skinClass="spark.skins.spark.FormItemSkin"
+					 includeIn="workSheet">
+			<s:HSlider id="employee_work_day_third_shift_overtime" 
+					   minimum="0" 
+					   maximum="1440"
+					   snapInterval="5"
+					   width="200"
+					   enabled="false"
+					   dataTipFormatFunction="{ FormHelper.totalMinutesToHoursMinutesString }"
+					   skinClass="spark.skins.spark.HSliderSkin" />
+		</s:FormItem>
+		
+	</s:Form>
+	
+</ui:SkinBase>

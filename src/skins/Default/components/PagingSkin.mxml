@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:SkinBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 xmlns:Library="com.desktop.system.Application.Library.*" 
+		 xmlns:Button="com.desktop.ui.Components.Button.*" 
+		 xmlns:ui="com.desktop.system.Application.Library.ui.*">
+	<ui:layout>
+		<s:HorizontalLayout/>
+	</ui:layout>
+	
+	<fx:Metadata>[HostComponent("components.Paging")]</fx:Metadata>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+
+	<fx:Script>
+		<![CDATA[
+			import com.desktop.system.Application.Library.ui.FormHelper;
+			
+			protected function orderDirectionButtonClickHandler(event:MouseEvent):void
+			{
+				orderDirectionButton.selected ? orderDirectionButton.label = "DESC" : orderDirectionButton.label = "ASC";
+			}
+
+		]]>
+	</fx:Script>
+	<s:HGroup id="mainGroup" verticalAlign="middle">
+		
+		<Button:DesktopControllButton id="firstPageButtonCmp"
+				  toolTip="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'firstPage' )} "
+				  icon="{resourceManager.getClass(this.session.config.LOCALE_CONFIG.systemIconsResourceName, 'leftArrow', this.session.skinsLocaleName ) }"   
+				  skinClass="{resourceManager.getClass(this.session.config.LOCALE_CONFIG.skinsResourceName, 'desktopButton', this.session.skinsLocaleName ) }" />
+		
+		<s:NumericStepper id="pageNumberCmp"
+						  toolTip="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'pageNumber' )}"
+						  maximum="{ hostComponent.TOTAL_PAGE_COUNT }"
+						  minimum="1" 
+						  width="70"
+						  height="32"
+						  textAlign="right"
+						  skinClass="spark.skins.spark.NumericStepperSkin"/>
+		
+		<s:Label text=" - " />
+		
+		<s:Label id="totalPageCountLabel" text="{ hostComponent.TOTAL_PAGE_COUNT }" fontSize="{getStyle('fontSize' )}"  />
+		
+		<s:ComboBox id="rowsPerPageCmp"
+					toolTip="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'rowsPerPage' )} "
+					selectedIndex="2"
+					fontSize="{getStyle('fontSize' )}" 
+					width="80" 
+					height="32" 
+					textAlign="right"
+					requireSelection="true"
+					labelToItemFunction="{FormHelper.numberLabelToItemFunction}"
+					skinClass="spark.skins.spark.ComboBoxSkin">
+			<s:dataProvider>
+				<s:ArrayList>
+					<fx:Number>5</fx:Number>
+					<fx:Number>15</fx:Number>
+					<fx:Number>30</fx:Number>
+					<fx:Number>50</fx:Number>
+					<fx:Number>100</fx:Number>
+				</s:ArrayList>
+			</s:dataProvider>
+		</s:ComboBox>
+		
+		<Button:DesktopControllButton id="lastPageButtonCmp"
+				  toolTip="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'lastPage' )}"
+				  iconPlacement="right"
+				  icon="{resourceManager.getClass(this.session.config.LOCALE_CONFIG.systemIconsResourceName, 'rightArrow', this.session.skinsLocaleName ) }"
+				  skinClass="{resourceManager.getClass(this.session.config.LOCALE_CONFIG.skinsResourceName, 'desktopButton', this.session.skinsLocaleName ) }"/>
+		
+		<Button:DesktopControllButton id="refreshButtonCmp"
+				  toolTip="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'refresh' )}"
+				  icon="{resourceManager.getClass(this.session.config.LOCALE_CONFIG.systemIconsResourceName, 'refreshIcon', this.session.skinsLocaleName ) }"
+				  skinClass="{resourceManager.getClass(this.session.config.LOCALE_CONFIG.skinsResourceName, 'desktopButton', this.session.skinsLocaleName ) }"/>
+		
+		<s:VGroup>
+			<s:ComboBox id="orderColumnsList" requireSelection="true" width="150" fontSize="{ getStyle('fontSize' ) }" labelToItemFunction="{FormHelper.disableLabelToItemFunction}"/>
+		</s:VGroup>
+		
+		<s:ToggleButton id="orderDirectionButton" label="ASC"  click="orderDirectionButtonClickHandler(event)" skinClass="spark.skins.spark.ToggleButtonSkin"/>
+		
+	</s:HGroup>
+	
+</ui:SkinBase>

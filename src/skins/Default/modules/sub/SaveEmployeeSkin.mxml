@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:SkinBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				  xmlns:s="library://ns.adobe.com/flex/spark" 
+    			  xmlns:fb="http://ns.adobe.com/flashbuilder/2009" 
+				  alpha.disabled="0.5"  
+				  xmlns:Library="com.desktop.system.Application.Library.*" 
+				  xmlns:Button="com.desktop.ui.Components.Button.*"
+				  xmlns:Group="com.desktop.ui.Components.Group.*"
+				  xmlns:mx="library://ns.adobe.com/flex/mx" 
+				  xmlns:app="components.app.*"
+				  xmlns:ui="com.desktop.system.Application.Library.ui.*">
+	
+	<fx:Metadata>[HostComponent("interfaces.modules.sub.ISaveEmployeeModule")]</fx:Metadata>
+	<fx:Script>
+		<![CDATA[
+			import com.desktop.system.Application.Library.ui.FormHelper;
+		]]>
+	</fx:Script>
+	
+    <fx:Declarations>
+		<s:RadioButtonGroup id="employee_gender" />
+		<s:RadioButtonGroup id="employee_hired" />
+	</fx:Declarations>
+	
+    <ui:states>
+        <s:State name="normal" />
+        <s:State name="disabled" />
+    </ui:states>
+    
+    <!--
+        Note: setting the minimum size to 0 here so that changes to the host component's
+        size will not be thwarted by this skin part's minimum size.   This is a compromise,
+        more about it here: http://bugs.adobe.com/jira/browse/SDK-21143
+    -->
+    <!--- @copy spark.components.SkinnableContainer#contentGroup -->
+
+	<s:Scroller id="scroller" top="0" left="0" bottom="0" right="0" skinClass="spark.skins.spark.ScrollerSkin">
+		
+		<s:Group id="contentGroup" minWidth="0" minHeight="0" top="0" bottom="0" right="0" left="0">
+			
+			<Group:ModuleNotification id="notifier" 
+									  width="100%" 
+									  height="100%"
+									  minHeight="{ employeeForm2.height }" minWidth="{ employeeForm1.width + employeeForm2.width }"
+									  skinClass="skins.Default.components.Group.ModuleNotificationSkin">
+				
+				<Group:LoadingContainer id="loadingContainer" width="100%" height="100%"
+										skinClass="skins.Default.components.Group.LoadingContainerSkin">
+					
+						<s:HGroup width="100%" height="100%">
+							
+							<s:Form id="employeeForm1" skinClass="spark.skins.spark.FormSkin">
+								
+								<s:layout>
+									<s:FormLayout gap="1"/>
+								</s:layout>
+								
+								<s:FormItem  label="ID:" skinClass="spark.skins.spark.FormItemSkin" visible="false" height="0">
+									<s:TextInput id="employee_id" skinClass="spark.skins.spark.TextInputSkin" width="250" />
+								</s:FormItem>
+								
+								<s:FormItem  label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'code') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:TextInput id="employee_code" skinClass="spark.skins.spark.TextInputSkin" width="250" tabIndex="1" />
+								</s:FormItem>
+								
+								<s:FormItem  label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'name') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:TextInput id="employee_name" skinClass="spark.skins.spark.TextInputSkin" width="250" tabIndex="2"/>
+								</s:FormItem>
+								
+								<s:FormItem  label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'lastName') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:TextInput id="employee_last_name" skinClass="spark.skins.spark.TextInputSkin" width="250" tabIndex="3"/>
+								</s:FormItem>
+								
+								<s:FormItem  label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'gender') }: " skinClass="spark.skins.spark.FormItemSkin">
+									
+									<s:RadioButton id="employeeGenderMale"
+												   label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'male') }"
+												   groupName="employee_gender"
+												   value="1"
+												   tabIndex="4"
+												   skinClass="spark.skins.spark.RadioButtonSkin" />
+									
+									<s:RadioButton id="employeeGenderFeMale"
+												   label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'female') }"
+												   groupName="employee_gender" 
+												   value="2"
+												   tabIndex="5"
+												   skinClass="spark.skins.spark.RadioButtonSkin" />
+								</s:FormItem>
+								
+								<s:FormItem label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'address') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:TextInput id="employee_address" skinClass="spark.skins.spark.TextInputSkin" width="250" tabIndex="6"/>
+								</s:FormItem>
+								
+								<s:FormItem label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'birthDate') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<mx:DateField id="employee_birth_date" width="250" tabIndex="7" formatString="YYYY-MM-DD"/>
+								</s:FormItem>
+							
+								<s:FormItem label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'socialSecurityNumber') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:TextInput id="employee_social_security_number" skinClass="spark.skins.spark.TextInputSkin" width="250" tabIndex="8"/>
+								</s:FormItem>
+								
+								<s:FormItem label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'personalNumber') } 2: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:TextInput id="employee_personal_number" skinClass="spark.skins.spark.TextInputSkin" width="250" tabIndex="9"/>
+								</s:FormItem>
+								
+								<s:FormItem label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'passportNumber') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:TextInput id="employee_passport_number" skinClass="spark.skins.spark.TextInputSkin" width="250" tabIndex="10"/>
+								</s:FormItem>
+								
+								<s:FormItem label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'hired') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:RadioButton id="employeeHiredYes"
+												   label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'yes') }"
+												   groupName="employee_hired"
+												   value="1"
+												   tabIndex="11"
+												   skinClass="spark.skins.spark.RadioButtonSkin" />
+									
+									<s:RadioButton id="employeeHiredNo"
+												   label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'no') }"
+												   groupName="employee_hired" 
+												   value="0"
+												   tabIndex="12"
+												   skinClass="spark.skins.spark.RadioButtonSkin" />
+								</s:FormItem>
+								
+								
+								<s:FormItem label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'hireDate') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<mx:DateField id="employee_hire_date" width="250" tabIndex="12" formatString="YYYY-MM-DD"/>
+								</s:FormItem>
+								
+								<s:FormItem label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'fireDate') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<mx:DateField id="employee_fire_date"  width="250" tabIndex="13" formatString="YYYY-MM-DD"/>
+								</s:FormItem>
+								
+							</s:Form>
+							<s:Form id="employeeForm2" skinClass="spark.skins.spark.FormSkin">
+								
+								<s:FormItem label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'title') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:TextInput id="employee_title" skinClass="spark.skins.spark.TextInputSkin" width="250" tabIndex="14"/>
+								</s:FormItem>
+								
+								
+								<s:FormItem label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'contractType') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:ComboBox id="employee_contract_type" requireSelection="true" width="250" tabIndex="15" labelToItemFunction="{FormHelper.disableLabelToItemFunction}" />
+								</s:FormItem>
+								
+								<s:FormItem label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'personalEmail') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:TextInput id="employee_personal_email" skinClass="spark.skins.spark.TextInputSkin" width="250" tabIndex="16"/>
+								</s:FormItem>
+								
+								<s:FormItem label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'personalPhone') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:TextInput id="employee_personal_phone" skinClass="spark.skins.spark.TextInputSkin" width="250" tabIndex="17"/>
+								</s:FormItem>
+								
+								<s:FormItem label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'businessEmail') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:TextInput id="employee_business_email" skinClass="spark.skins.spark.TextInputSkin" width="250" tabIndex="18"/>
+								</s:FormItem>
+								
+								<s:FormItem label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'businessPhone') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:TextInput id="employee_business_phone" skinClass="spark.skins.spark.TextInputSkin" width="250" tabIndex="19"/>
+								</s:FormItem>
+								
+								<s:FormItem label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'phoneExtension') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:TextInput id="employee_business_phone_extension" skinClass="spark.skins.spark.TextInputSkin" width="250" tabIndex="20"/>
+								</s:FormItem>
+									
+								<s:FormItem label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'workingScenario') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:ComboBox id="employee_working_scenario_id" requireSelection="true" skinClass="spark.skins.spark.ComboBoxSkin" width="250" tabIndex="21" labelToItemFunction="{FormHelper.disableLabelToItemFunction}" />
+								</s:FormItem>				
+								
+								<s:FormItem label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'employeeEconomics') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:ComboBox id="employee_economics_id" requireSelection="true" skinClass="spark.skins.spark.ComboBoxSkin" width="250" tabIndex="22" labelToItemFunction="{FormHelper.disableLabelToItemFunction}" />
+								</s:FormItem>				
+								
+								<s:FormItem label="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'note') }: " skinClass="spark.skins.spark.FormItemSkin">
+									<s:TextArea id="employee_note" skinClass="spark.skins.spark.TextAreaSkin" height="100" width="250" tabIndex="23"/>
+								</s:FormItem>
+								
+								<s:FormItem skinClass="spark.skins.spark.FormItemSkin">
+									<app:SaveData id="saveDataCmp" skinClass="skins.Default.components.app.SaveDataSkin" />
+								</s:FormItem>
+								
+							</s:Form>
+							
+							
+						</s:HGroup>
+				
+				</Group:LoadingContainer>
+				
+			</Group:ModuleNotification>
+			
+		</s:Group>
+
+	</s:Scroller>
+	
+</ui:SkinBase>

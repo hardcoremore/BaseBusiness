@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:SkinBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			 xmlns:s="library://ns.adobe.com/flex/spark"
+			 alpha.disabled="0.5"
+			 xmlns:Library="com.desktop.system.Application.Library.*" 
+			 xmlns:ui="com.desktop.system.Application.Library.ui.*">
+	
+	<!-- host component -->
+	<fx:Metadata>
+		<![CDATA[ 
+		[HostComponent("spark.components.Button")]
+		]]>
+	</fx:Metadata>
+	
+	<fx:Declarations>
+		<s:GlowFilter alpha=".8" blurX="9" blurY="6" strength="2"  color="#6bd0fa" quality="3" id="glowFilter"/>
+	</fx:Declarations>
+	
+	<!-- states -->
+	<ui:states>
+		<s:State name="up"  />
+		<s:State name="over" />
+		<s:State name="down" />
+		<s:State name="disabled" />
+	</ui:states>
+	
+	<s:BitmapImage source="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.systemIconsResourceName, 'minimizeButtonNormal', this.session.skinsLocaleName )}"
+			  source.over="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.systemIconsResourceName, 'minimizeButtonOver', this.session.skinsLocaleName )}"
+			  source.down="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.systemIconsResourceName, 'minimizeButtonDown', this.session.skinsLocaleName )}"	
+			  filters.over="{[glowFilter]}"
+			  filters.down="{[glowFilter]}"/>
+	
+</ui:SkinBase>

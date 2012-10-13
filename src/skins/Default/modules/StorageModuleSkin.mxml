@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:SkinBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx"
+		xmlns:ui="com.desktop.system.Application.Library.ui.*" xmlns:Group="com.desktop.ui.Components.Group.*" xmlns:Button="com.desktop.ui.Components.Button.*" xmlns:components="components.*">
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("interfaces.modules.IStorageModule")]
+	</fx:Metadata>
+	<fx:Script>
+		<![CDATA[
+			import com.desktop.system.Application.Library.ui.FormHelper;
+			
+			import spark.filters.GlowFilter;
+		]]>
+	</fx:Script>
+	
+	<!-- states -->
+	<ui:states>
+		<s:State name="disabled" />
+		<s:State name="normal" />
+	</ui:states>
+	
+	<s:Scroller id="scroller" top="0" left="0" bottom="0" right="0" skinClass="spark.skins.spark.ScrollerSkin">
+		
+		<s:Group id="contentGroup" minHeight="0" minWidth="0" top="0" bottom="0" left="0" right="0">
+			
+			<Group:ModuleNotification id="notifier" width="100%" height="100%"
+									  minWidth="750" 
+									  minHeight="600"
+									  skinClass="skins.Default.components.Group.ModuleNotificationSkin">
+				
+				<Group:LoadingContainer id="loadingContainer" width="100%" height="100%"
+										skinClass="skins.Default.components.Group.LoadingContainerSkin">
+					
+					<s:HGroup width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
+						
+						<s:VGroup id="itemsGroup" height="100%" width="100%">
+							
+							<s:HGroup id="itemsControllGroup">
+								
+								<Button:DesktopControllButton id="newItemButton"
+															  toolTip="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'newItem' ) }"
+															  icon="{resourceManager.getClass( 'systemIconClasses', 'addIcon', 'Default_skinClasses' ) }"
+															  skinClass="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.skinsResourceName, 'desktopButton', this.session.skinsLocaleName ) }"/>
+								
+								<Button:DesktopControllButton id="updateItemButton"
+															  toolTip="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'updateItem' ) }"
+															  icon="{resourceManager.getClass( 'systemIconClasses', 'updateIcon', this.session.skinsLocaleName ) }"
+															  skinClass="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.skinsResourceName, 'desktopButton', this.session.skinsLocaleName ) }"/>
+								
+								<Button:DesktopControllButton id="itemsCategoriesButton"
+															  toolTip="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'itemCategories' ) }"
+															  icon="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.systemIconsResourceName, 'reportIcon', this.session.skinsLocaleName ) }"
+															  skinClass="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.skinsResourceName, 'desktopButton', this.session.skinsLocaleName ) }"/>
+								
+								<Button:DesktopControllButton id="deleteItemButton"
+															  toolTip="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'delete' ) }"
+															  icon="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.systemIconsResourceName, 'deleteErrorIcon', this.session.skinsLocaleName ) }"
+															  skinClass="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.skinsResourceName, 'desktopButton', this.session.skinsLocaleName ) }"/>
+								
+								<Button:DesktopControllButton id="configButton"
+															  toolTip="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'config' ) }"
+															  icon="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.systemIconsResourceName, 'settingsIcon', this.session.skinsLocaleName ) }"
+															  skinClass="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.skinsResourceName, 'desktopButton', this.session.skinsLocaleName ) }"/>
+								
+								<components:QuickSearch id="itemsQuickSearch" 
+														skinClass="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.skinsResourceName, 'quickSearchComponent', this.session.skinsLocaleName ) }"/>
+								
+							</s:HGroup>
+							
+							<s:DataGrid width="100%" height="100%"
+										id="itemsDataHolder"
+										filters="{[new spark.filters.GlowFilter(0xCCCCCC, 1, 6, 6, 2, 2)]}"
+										skinClass="spark.skins.spark.DataGridSkin">
+								<s:columns>
+									<s:ArrayList id="itemsColumns">
+										<s:GridColumn dataField="storage_item_id" headerText="ID" visible="false"/>
+										<s:GridColumn dataField="storage_item_code" headerText="code" />
+										<s:GridColumn dataField="storage_item_name" headerText="name" />
+										<s:GridColumn dataField="storage_item_descrition" headerText="description" />
+										<s:GridColumn dataField="storage_item_category" headerText="category" visible="false"/>
+										<s:GridColumn dataField="storage_item_category_name" headerText="category" />
+										<s:GridColumn dataField="storage_item_order_quantity" headerText="orderQuantity" />
+										<s:GridColumn dataField="storage_item_volume" headerText="volume" />
+										<s:GridColumn dataField="storage_item_weight" headerText="weight" />
+										<s:GridColumn dataField="storage_item_type" headerText="type" />
+										<s:GridColumn dataField="storage_item_unit_of_measure" headerText="unitOfMeasure" />
+										<s:GridColumn dataField="storage_item_bar_code" headerText="barCode" />
+										<s:GridColumn dataField="storage_item_tax_percent" headerText="taxAmmount" />
+										<s:GridColumn dataField="storage_item_date_created" headerText="creationDate" />
+									</s:ArrayList>
+								</s:columns>
+							</s:DataGrid>
+							
+							<components:Paging id="itemsPaging" left="0" 
+											   skinClass="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.skinsResourceName, 'pagingComponent', this.session.skinsLocaleName ) }"/>
+							
+							
+						</s:VGroup>
+						
+						<s:VGroup id="storageItemsGroup" height="100%" width="100%">
+							
+							<s:HGroup id="storageItemsControllGroup" verticalAlign="middle">
+								
+								<Button:DesktopControllButton id="storagesModuleButton"
+															  toolTip="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'itemStorages' ) }"
+															  icon="{resourceManager.getClass( 'systemIconClasses', 'addressIcon', this.session.skinsLocaleName ) }"
+															  skinClass="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.skinsResourceName, 'desktopButton', this.session.skinsLocaleName ) }"/>
+
+								
+								<s:ComboBox id="storagesList" labelToItemFunction="{FormHelper.disableLabelToItemFunction}" 
+											prompt="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'selectStorage' ) }">
+									
+								</s:ComboBox>
+								
+								<components:QuickSearch id="storageItemsQuickSearch" 
+														skinClass="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.skinsResourceName, 'quickSearchComponent', this.session.skinsLocaleName ) }"/>
+								
+							</s:HGroup>
+							
+							<s:VGroup height="100%" width="100%">
+								
+								<s:DataGrid width="100%" height="100%"
+											id="storageContentsDataHolder"
+											filters="{[new spark.filters.GlowFilter(0xCCCCCC, 1, 6, 6, 2, 2)]}"
+											skinClass="spark.skins.spark.DataGridSkin">
+									<s:columns>
+										<s:ArrayList id="storageContentsColumns">
+											<s:GridColumn dataField="storage_item_id" headerText="ID" visible="false"/>
+											<s:GridColumn dataField="storage_item_code" headerText="code" />
+											<s:GridColumn dataField="storage_item_name" headerText="name" />
+											<s:GridColumn dataField="storage_item_type" headerText="type" />
+											<s:GridColumn dataField="storage_item_category_type" headerText="categoryType" />
+											<s:GridColumn dataField="storage_item_category_name" headerText="categoryName" />
+											<s:GridColumn dataField="storage_item_category" headerText="categoryId" />
+											<s:GridColumn dataField="storage_item_amount" headerText="amount" />
+											<s:GridColumn dataField="storage_item_price" headerText="price" />
+										</s:ArrayList>
+									</s:columns>
+								</s:DataGrid>
+								
+								
+									<components:Paging id="storageContentsPaging" left="0" 
+													   skinClass="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.skinsResourceName, 'pagingComponent', this.session.skinsLocaleName ) }"/>
+							
+							</s:VGroup>
+							
+						</s:VGroup>
+						
+					</s:HGroup>
+					
+				</Group:LoadingContainer>
+				
+			</Group:ModuleNotification>
+			
+		</s:Group>
+		
+	</s:Scroller>
+	
+</ui:SkinBase>

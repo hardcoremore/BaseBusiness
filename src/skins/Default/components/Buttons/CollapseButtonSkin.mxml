@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SparkSkin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			 xmlns:s="library://ns.adobe.com/flex/spark" 
+			 xmlns:mx="library://ns.adobe.com/flex/mx"
+			 alpha.disabled="0.5"
+			 >
+	
+	<!-- host component -->
+	<fx:Metadata>
+		<![CDATA[ 
+		[HostComponent("spark.components.Button")]
+		]]>
+	</fx:Metadata>
+	
+	<fx:Script>
+		<![CDATA[
+			
+			[Bindable]
+			[Embed(source="images/collapseNormal.png")]
+			private var collapseNormal:Class;
+			
+			[Bindable]
+			[Embed(source="images/collapseNormal.png")]
+			private var collapseOver:Class;
+			
+		]]>
+	</fx:Script>
+	<!-- states -->
+	<s:states>
+		<s:State name="up"  />
+		<s:State name="over" />
+		<s:State name="down" />
+		<s:State name="disabled" />
+	</s:states>
+	
+	<mx:Image source="{collapseNormal}"
+			  source.over="{collapseOver}"
+			  source.down="{collapseOver}"	
+			  
+			  />
+</s:SparkSkin>

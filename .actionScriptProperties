@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<actionScriptProperties analytics="false" mainApplicationPath="BaseBussiness.mxml" projectUUID="5e18c6ad-10db-4401-90b0-5a4706768904" version="10">
+  <compiler additionalCompilerArguments="-default-frame-rate 40 -swf-version=15" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="true" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="true" outputFolderLocation="C:/wamp/www/BusinessBase-debug" outputFolderPath="bin-debug" removeUnusedRSL="true" rootURL="http://127.0.0.1/BusinessBase-debug" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
+    <compilerSourcePath>
+      <compilerSourcePathEntry kind="1" linkType="1" path="C:/Users/Chaky/AS3Libraries/Desktop/src"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="C:/Users/Chaky/AS3Libraries/TweenLite/src"/>
+    </compilerSourcePath>
+    <libraryPath defaultLinkType="1">
+      <libraryPathEntry kind="4" path="">
+        <excludedEntries>
+          <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/flex.swc" useDefaultLinkType="false"/>
+          <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/core.swc" useDefaultLinkType="false"/>
+        </excludedEntries>
+      </libraryPathEntry>
+      <libraryPathEntry kind="1" linkType="1" path="libs"/>
+      <libraryPathEntry kind="3" linkType="1" path="src/resources/MainPreloader.swc" useDefaultLinkType="false"/>
+    </libraryPath>
+    <sourceAttachmentPath/>
+  </compiler>
+  <applications>
+    <application path="BaseBussiness.mxml"/>
+  </applications>
+  <modules>
+    <module application="src/BaseBussiness.mxml" destPath="modules/sub/EmployeeCostsAndStimulationModule.swf" optimize="true" sourcePath="src/modules/sub/EmployeeCostsAndStimulationModule.as"/>
+    <module application="src/BaseBussiness.mxml" destPath="modules/sub/SaveUserModule.swf" optimize="true" sourcePath="src/modules/sub/SaveUserModule.as"/>
+    <module application="src/BaseBussiness.mxml" destPath="modules/UsersModule.swf" optimize="true" sourcePath="src/modules/UsersModule.as"/>
+    <module application="src/BaseBussiness.mxml" destPath="modules/sub/SaveEmployeeModule.swf" optimize="true" sourcePath="src/modules/sub/SaveEmployeeModule.as"/>
+    <module application="src/BaseBussiness.mxml" destPath="modules/ConfigModule.swf" optimize="true" sourcePath="src/modules/ConfigModule.as"/>
+    <module application="src/BaseBussiness.mxml" destPath="modules/sub/EmployeesConfigModule.swf" optimize="true" sourcePath="src/modules/sub/EmployeesConfigModule.as"/>
+    <module application="src/BaseBussiness.mxml" destPath="modules/sub/EmployeeEconomicsModule.swf" optimize="true" sourcePath="src/modules/sub/EmployeeEconomicsModule.as"/>
+    <module application="src/BaseBussiness.mxml" destPath="modules/sub/UpdateAssociate.swf" optimize="true" sourcePath="src/modules/sub/UpdateAssociate.as"/>
+    <module application="src/BaseBussiness.mxml" destPath="modules/AuthenticationModule.swf" optimize="true" sourcePath="src/modules/AuthenticationModule.as"/>
+    <module application="src/BaseBussiness.mxml" destPath="modules/CustomersModule.swf" optimize="true" sourcePath="src/modules/CustomersModule.as"/>
+    <module application="src/BaseBussiness.mxml" destPath="modules/sub/EmployeeSalaryModule.swf" optimize="true" sourcePath="src/modules/sub/EmployeeSalaryModule.as"/>
+    <module application="src/BaseBussiness.mxml" destPath="modules/StorageInputModule.swf" optimize="true" sourcePath="src/modules/StorageInputModule.as"/>
+    <module application="src/BaseBussiness.mxml" destPath="modules/sub/StorageItemCategoriesModule.swf" optimize="true" sourcePath="src/modules/sub/StorageItemCategoriesModule.as"/>
+    <module application="src/BaseBussiness.mxml" destPath="modules/sub/StoragesModule.swf" optimize="true" sourcePath="src/modules/sub/StoragesModule.as"/>
+    <module application="src/BaseBussiness.mxml" destPath="modules/sub/EmployeeWorkingScenarioModule.swf" optimize="true" sourcePath="src/modules/sub/EmployeeWorkingScenarioModule.as"/>
+    <module application="src/BaseBussiness.mxml" destPath="modules/sub/SaveCustomerModule.swf" optimize="true" sourcePath="src/modules/sub/SaveCustomerModule.as"/>
+    <module application="src/BaseBussiness.mxml" destPath="modules/sub/CustomersConfigModule.swf" optimize="true" sourcePath="src/modules/sub/CustomersConfigModule.as"/>
+    <module application="src/BaseBussiness.mxml" destPath="modules/sub/SaveItemModule.swf" optimize="true" sourcePath="src/modules/sub/SaveItemModule.as"/>
+    <module application="src/BaseBussiness.mxml" destPath="modules/StorageModule.swf" optimize="true" sourcePath="src/modules/StorageModule.as"/>
+    <module application="src/BaseBussiness.mxml" destPath="modules/InvoicesModule.swf" optimize="true" sourcePath="src/modules/InvoicesModule.as"/>
+    <module application="src/BaseBussiness.mxml" destPath="modules/EmployeesModule.swf" optimize="true" sourcePath="src/modules/EmployeesModule.as"/>
+    <module application="src/BaseBussiness.mxml" destPath="modules/sub/EmployeeWorkSheetModule.swf" optimize="true" sourcePath="src/modules/sub/EmployeeWorkSheetModule.as"/>
+    <module application="src/BaseBussiness.mxml" destPath="modules/sub/SaveInvoiceModule.swf" optimize="true" sourcePath="src/modules/sub/SaveInvoiceModule.as"/>
+  </modules>
+  <buildCSSFiles/>
+  <flashCatalyst validateFlashCatalystCompatibility="false"/>
+</actionScriptProperties>

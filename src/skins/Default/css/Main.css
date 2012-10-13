@@ -1,0 +1,88 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+@namespace components "components.*";
+@namespace DesktopButton "com.desktop.ui.Components.Button.*";
+@namespace Components "com.desktop.ui.Components.*";
+@namespace NavBars "com.desktop.ui.Components.NavBars.*";
+@namespace Window "com.desktop.ui.Components.Window.*";
+
+s|ToggleButton
+{
+	iconWidth:32;
+	iconHeight:32;
+}
+
+s|TextInput
+{
+	fontSize:16;
+}
+
+components|Paging
+{
+	fontSize:14;
+}
+
+mx|ToolTip
+{
+	fontSize:16;
+}
+
+NavBars|TaskBar
+{
+	backgroundColor:#0074e1;
+}
+
+NavBars|DesktopButtonBar
+{
+	fontSize:15;
+}
+
+Components|DesktopComponent
+{
+	taskBarThickness:32;
+	taskBarPosition:taskbar-bottom-position;
+}
+
+Window|DesktopWindow
+{
+	titleBarThickness:24;
+	borderThickness: 8;
+	cornerRadius: 6; 
+	borderAlpha: .8;
+	backgroundColor:#e8ffd5;
+	backgroundAlpha:1;
+	borderColor:#007dc4;
+	borderAlpha:1;
+	
+}
+
+Window|DesktopNotification
+{
+	
+}
+
+DesktopButton|Icon
+{
+	iconHeight:96;
+	iconWidth:96;
+}
+
+mx|Accordion
+{
+	
+}
+
+DesktopButton|DesktopControllButton
+{
+	iconHeight:64;
+	iconWidth:64;
+}
+global
+{
+	symbol-color: #961C1C;
+}
+

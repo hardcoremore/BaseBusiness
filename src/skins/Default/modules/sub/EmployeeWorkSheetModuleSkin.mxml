@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:SkinBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			 xmlns:s="library://ns.adobe.com/flex/spark" 
+			 xmlns:fb="http://ns.adobe.com/flashbuilder/2009" 
+			 alpha.disabled="0.5"  
+			 xmlns:Library="com.desktop.system.Application.Library.*" 
+			 xmlns:Button="com.desktop.ui.Components.Button.*"
+			 xmlns:ui="com.desktop.system.Application.Library.ui.*"
+			 xmlns:Group="com.desktop.ui.Components.Group.*" 
+			 xmlns:mx="library://ns.adobe.com/flex/mx" 
+			 xmlns:app="components.app.*">
+	
+	<fx:Metadata>[HostComponent("interfaces.modules.sub.IEmployeeWorkSheetModule")]</fx:Metadata>
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import spark.filters.GlowFilter;			
+			
+			protected function workDayForm_creationCompleteHandler(event:FlexEvent):void
+			{
+				
+			}
+			
+			protected function workDayForm_initializeHandler(event:FlexEvent):void
+			{
+				
+			}
+			
+			protected function formGroup_initializeHandler(event:FlexEvent):void
+			{
+				formGroup.removeElement( employeeWorkDayWageFormItem );
+				formGroup.removeElement( workingScenariosFormItem );
+				formGroup.removeElement( dateRangeFormGroup );
+				
+				workDayForm.dayForm.addElement( employeeWorkDayWageFormItem );
+				workDayForm.dayForm.addElement( workingScenariosFormItem );
+				workDayForm.dayForm.addElement( dateRangeFormGroup );
+			}
+			
+		]]>
+	</fx:Script>
+	
+
+	<ui:states>
+		<s:State name="normal" />
+		<s:State name="disabled" />
+	</ui:states>
+	
+	<s:Scroller id="scroller" top="0" left="0" bottom="0" right="0" skinClass="spark.skins.spark.ScrollerSkin">
+		
+		<s:Group id="contentGroup" minWidth="0" minHeight="0" top="0" bottom="0" right="0" left="0">
+			
+			<Group:ModuleNotification id="notifier" width="100%" height="100%"
+									  minHeight="{ workDayForm.height + controllGroup.height + employeeNameLabel.height + ( employeeNameLabel.getStyle( 'paddingTop' ) as Number ) }"
+									  minWidth="{ formGroup.width + sheetsListGroup.width }"
+									  skinClass="skins.Default.components.Group.ModuleNotificationSkin">
+				
+				<Group:LoadingContainer id="loadingContainer" width="100%" height="100%"
+										skinClass="skins.Default.components.Group.LoadingContainerSkin">
+				
+					<s:HGroup gap="1" width="100%" height="100%">
+						
+						<s:VGroup height="100%" id="formGroup" initialize="formGroup_initializeHandler(event)">
+							
+							<s:HGroup width="100%" verticalAlign="middle" paddingRight="10">
+								<s:Label id="employeeNameLabel" fontSize="{ getStyle( 'fontSize' ) + 8 }" fontWeight="bold" width="100%" textAlign="center" paddingTop="15"/>
+								<s:ToggleButton id="toggleGridButton" right="0" fontSize="{ getStyle( 'fontSize' ) + 3}" 
+												change="{ toggleGridButton.selected ? workSheetsDataHolder.percentHeight = 0 : workSheetsDataHolder.percentHeight = 40 }" 
+												label="{ toggleGridButton.selected ? resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'show' ) : resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'hide' ) }"
+												 />
+							</s:HGroup>
+									 
+							<app:WorkDayForm id="workDayForm" skinClass="skins.Default.components.app.WorkDayFormSkin" mode="{WorkDayForm.MODE_WORK_SHEET}"/>
+			
+							<s:FormItem id="employeeWorkDayWageFormItem" label="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'wage' ) }:">
+								
+								<s:HGroup verticalAlign="middle">
+									
+									<s:TextInput id="employeeWorkDayWage" />
+									
+									<Button:DesktopControllButton id="applyDayWageButton"
+																  toolTip="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'applyAllWorkingDaysWage' ) }"
+																  icon="{resourceManager.getClass( 'systemIconClasses', 'updateIcon', 'Default_skinClasses' ) }"
+																  skinClass="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.skinsResourceName, 'desktopButton', this.session.skinsLocaleName ) }"/>
+									
+								</s:HGroup>
+								
+							</s:FormItem>
+							
+							<s:FormItem id="workingScenariosFormItem" label="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'workingScenario' ) }:">
+								<s:ComboBox id="availableWorkingScenariosList" />	
+							</s:FormItem>
+							
+							<s:VGroup id="dateRangeFormGroup" width="100%" horizontalAlign="center">
+								
+								<s:HGroup width="100%" horizontalAlign="center" gap="50">
+									<s:Label fontWeight="bold" text="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'starts' ) }" />
+									<s:Label fontWeight="bold" text="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'ends' ) }"	/>							 
+								</s:HGroup>
+								
+								
+								<s:HGroup width="100%" horizontalAlign="center" gap="30">
+									<mx:DateField id="employee_working_sheet_date_start" formatString="YYYY-MM-DD" />
+									<mx:DateField id="employee_working_sheet_date_end" formatString="YYYY-MM-DD" />
+									
+								</s:HGroup>
+								
+							</s:VGroup>
+							
+							
+							<s:HGroup width="100%" horizontalAlign="center" id="controllGroup">
+								
+								<Button:DesktopControllButton id="generateWorkingScenarioTemplateButton"
+															  toolTip="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'generateTemplate' ) }"
+															  icon="{resourceManager.getClass( 'systemIconClasses', 'updateIcon', 'Default_skinClasses' ) }"
+															  skinClass="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.skinsResourceName, 'desktopButton', this.session.skinsLocaleName ) }"/>
+								
+								<Button:DesktopControllButton id="newWorkSheetButton"
+															  toolTip="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'newWorkSheet' ) }"
+															  icon="{resourceManager.getClass( 'systemIconClasses', 'addIcon', 'Default_skinClasses' ) }"
+															  skinClass="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.skinsResourceName, 'desktopButton', this.session.skinsLocaleName ) }"/>
+								
+								<Button:DesktopControllButton id="saveWorkSheetButton" 
+															  toolTip="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'save')}"  
+															  icon="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.systemIconsResourceName, 'saveIcon', this.session.skinsLocaleName )}" 
+															  skinClass="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.skinsResourceName, 'desktopButton', this.session.skinsLocaleName ) }"/>
+								
+								<Button:DesktopControllButton id="resetWorkSheetButton" 
+															  toolTip="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'reset')}"  
+															  icon="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.systemIconsResourceName, 'clearIcon', this.session.skinsLocaleName )}" 
+															  skinClass="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.skinsResourceName, 'desktopButton', this.session.skinsLocaleName ) }"/>
+								
+								<Button:DesktopControllButton id="refreshButton"
+															  toolTip="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'refresh' )}"
+															  icon="{resourceManager.getClass(this.session.config.LOCALE_CONFIG.systemIconsResourceName, 'refreshIcon', this.session.skinsLocaleName ) }"
+															  skinClass="{resourceManager.getClass(this.session.config.LOCALE_CONFIG.skinsResourceName, 'desktopButton', this.session.skinsLocaleName ) }"/>
+								
+								<Button:DesktopControllButton id="deleteWorkSheetButton" 
+															  right="0" 
+															  toolTip="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'delete' ) }"
+															  icon="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.systemIconsResourceName, 'deleteErrorIcon', this.session.skinsLocaleName ) }"
+															  skinClass="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.skinsResourceName, 'desktopButton', this.session.skinsLocaleName ) }"/>
+								
+							</s:HGroup>
+								
+						</s:VGroup>
+						
+						<s:VGroup id="sheetsListGroup"
+								  height="100%" width="100%"
+								  horizontalAlign="center" paddingRight="10">
+							
+							<s:DataGrid width="100%" height="40%"
+										id="workSheetsDataHolder"  
+										minHeight="{ getStyle( 'fontSize' ) * 2 }" 
+										borderAlpha="{ toggleGridButton.selected ? 0 : 1 }"
+										filters="{[new spark.filters.GlowFilter(0xCCCCCC, 1, 6, 6, 2, 2)]}"
+										skinClass="spark.skins.spark.DataGridSkin" >
+								<s:columns>
+									<s:ArrayList id="employeesColumns">
+										<s:GridColumn dataField="employee_work_sheet_id" headerText="ID" visible="false"/>
+										<s:GridColumn dataField="employee_id" visible="false" headerText=""/>
+										
+										<s:GridColumn dataField="employee_work_sheet_date_start"  headerText="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'starts') }"/>
+										<s:GridColumn dataField="employee_work_sheet_date_end"  headerText="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'ends') }"/>
+										
+										<s:GridColumn dataField="employee_work_sheet_work_time_total"  headerText="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'timeTotal') }"/>
+										<s:GridColumn dataField="employee_work_sheet_business_trip_time_total"  headerText="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'businessTripTotal') }"/>
+										<s:GridColumn dataField="employee_work_sheet_sick_time_total"  headerText="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'sickTotal') }"/>
+										<s:GridColumn dataField="employee_work_sheet_work_overtime_total"  headerText="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'overtimeTotal') }"/>
+										
+										<s:GridColumn dataField="employee_work_sheet_first_shift_time_total"  headerText="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'firstShiftTimeTotal') }"/>
+										<s:GridColumn dataField="employee_work_sheet_second_shift_time_total"  headerText="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'secondShiftTimeTotal') }"/>
+										<s:GridColumn dataField="employee_work_sheet_third_shift_time_total"  headerText="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'thirdShiftTimeTotal') }"/>
+										
+										<s:GridColumn dataField="employee_work_sheet_num_days_total"  headerText="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'numDaysTotal') }"/>
+										
+										<s:GridColumn dataField="employee_work_sheet_first_shift_overtime_total"  headerText="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'firstShiftOvertimeTotal') }"/>
+										<s:GridColumn dataField="employee_work_sheet_second_shift_overtime_total"  headerText="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'secondShiftOvertimeTotal') }"/>
+										<s:GridColumn dataField="employee_work_sheet_third_shift_overtime_total"  headerText="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'thirdShiftOvertimeTotal') }"/>
+										
+										<s:GridColumn dataField="employee_work_sheet_num_days_total"  headerText="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'numDaysTotal') }"/>
+										<s:GridColumn dataField="employee_work_sheet_work_days_total"  headerText="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'workDaysTotal') }"/>
+										<s:GridColumn dataField="employee_work_sheet_business_trip_days_total"  headerText="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'businessTripDaysTotal') }"/>
+										<s:GridColumn dataField="employee_work_sheet_sick_days_total"  headerText="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'sickDaysTotal') }"/>
+										<s:GridColumn dataField="employee_work_sheet_not_working_days_total"  headerText="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'notWorkingDaysTotal') }"/>
+										<s:GridColumn dataField="employee_work_sheet_vacation_days_total"  headerText="{ resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'vacationDaysTotal') }"/>
+										
+									</s:ArrayList>
+								</s:columns>
+							</s:DataGrid>
+							
+							<s:Group height="100%">
+								
+								<s:Rect width="100%" height="100%">
+									<s:fill>
+										<s:SolidColor color="#FFFFFF" />
+									</s:fill>
+								</s:Rect>
+								
+								<s:Scroller top="5"
+											bottom="5"
+											left="5"
+											right="5">
+									
+									<s:Group id="workDaysHolder">
+										
+										<s:layout>
+											<s:TileLayout horizontalAlign="center" 
+														  verticalAlign="top" 
+														  requestedColumnCount="7"
+														  paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5"/>
+										</s:layout>
+										
+									</s:Group>
+									
+								</s:Scroller>
+								
+							</s:Group>
+							
+						</s:VGroup>
+						
+					</s:HGroup>
+				
+				</Group:LoadingContainer>
+			
+			</Group:ModuleNotification>
+			
+		</s:Group>
+		
+	</s:Scroller>
+	
+</ui:SkinBase>
+

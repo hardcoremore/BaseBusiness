@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:SkinBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			 xmlns:s="library://ns.adobe.com/flex/spark" 
+			 xmlns:fb="http://ns.adobe.com/flashbuilder/2009" 
+			 alpha.disabled="0.5"  
+			 xmlns:Library="com.desktop.system.Application.Library.*" 
+			 xmlns:Button="com.desktop.ui.Components.Button.*"
+			 xmlns:ui="com.desktop.system.Application.Library.ui.*"
+			 xmlns:Group="com.desktop.ui.Components.Group.*" 
+			 xmlns:mx="library://ns.adobe.com/flex/mx" 
+			 xmlns:app="components.app.*" xmlns:itemEditors="itemEditors.*" >
+	
+	<fx:Metadata>[HostComponent("interfaces.modules.sub.IStorageItemCategoriesModule")]</fx:Metadata>
+	<fx:Script>
+		<![CDATA[
+			import models.StorageModel;
+			
+			import mx.collections.IList;
+			
+			import spark.filters.GlowFilter;		
+			
+			[Bindable]
+			public var categoryTypeDataProvider:IList = StorageModel.itemCategoryTypeDataProvider;
+			
+		]]>
+	</fx:Script>
+	
+	<ui:states>
+		<s:State name="normal" />
+		<s:State name="disabled" />
+	</ui:states>
+	
+	<s:Scroller id="scroller" top="0" left="0" bottom="0" right="0" skinClass="spark.skins.spark.ScrollerSkin">
+		
+		<s:Group id="contentGroup" minHeight="0" minWidth="0" top="0" bottom="0" left="0" right="0">
+			
+			<Group:ModuleNotification id="notifier" width="100%" height="100%"
+									  minWidth="{ 600 }" 
+									  minHeight="{400 }"
+									  skinClass="skins.Default.components.Group.ModuleNotificationSkin">
+				
+				<Group:LoadingContainer id="loadingContainer" width="100%" height="100%"
+										skinClass="skins.Default.components.Group.LoadingContainerSkin">
+				
+					<s:VGroup width="100%" height="100%">
+						
+						
+							
+							<s:HGroup id="controllGroup">
+								
+								<Button:DesktopControllButton id="newCategoryButton"
+															  toolTip="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'newCategory' ) }"
+															  icon="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.systemIconsResourceName, 'addIcon', this.session.skinsLocaleName ) }"
+															  skinClass="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.skinsResourceName, 'desktopButton', this.session.skinsLocaleName ) }"/>
+								
+								<Button:DesktopControllButton id="refreshButton"
+															  toolTip="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'refresh' )}"
+															  icon="{resourceManager.getClass(this.session.config.LOCALE_CONFIG.systemIconsResourceName, 'refreshIcon', this.session.skinsLocaleName ) }"
+															  skinClass="{resourceManager.getClass(this.session.config.LOCALE_CONFIG.skinsResourceName, 'desktopButton', this.session.skinsLocaleName ) }"/>
+								
+								<Button:DesktopControllButton id="deleteCategoryButton" 
+															  right="0" 
+															  toolTip="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'deleteCategory' ) }"
+															  icon="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.systemIconsResourceName, 'deleteErrorIcon', this.session.skinsLocaleName ) }"
+															  skinClass="{resourceManager.getClass( this.session.config.LOCALE_CONFIG.skinsResourceName, 'desktopButton', this.session.skinsLocaleName ) }"/>
+								
+							</s:HGroup>
+						
+							
+							<s:DataGrid width="100%" height="100%"
+										id="categoriesDataHolder"
+										filters="{[new spark.filters.GlowFilter(0xCCCCCC, 1, 6, 6, 2, 2)]}"
+										skinClass="spark.skins.spark.DataGridSkin"
+										editable="true">
+								<s:columns>
+									<s:ArrayList id="categoriesColumns">
+										<s:GridColumn dataField="storage_item_category_id" headerText="ID" visible="false"/>
+										<s:GridColumn dataField="storage_item_category_code" headerText="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'code')}"  editable="true"/>
+										<s:GridColumn dataField="storage_item_category_name" headerText="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'name')}" editable="true"/>
+										<s:GridColumn dataField="storage_item_category_type" labelFunction="{StorageModel.itemCategoryTypeLabelFunction}"
+													  headerText="{resourceManager.getString( this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'type')}" 
+													  editable="true">
+											<s:itemEditor>
+												<fx:Component>
+													<itemEditors:StaticComboBoxGridItemEditor dataField="value" staticData="{outerDocument.categoryTypeDataProvider}" />
+												</fx:Component>
+											</s:itemEditor>
+										</s:GridColumn>
+									</s:ArrayList>
+								</s:columns>
+							</s:DataGrid>
+							
+					</s:VGroup>
+			
+				</Group:LoadingContainer>
+				
+			</Group:ModuleNotification>
+			
+		</s:Group>
+	
+	</s:Scroller>
+	
+</ui:SkinBase>
+

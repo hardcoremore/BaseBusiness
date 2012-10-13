@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:SkinBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 xmlns:Library="com.desktop.system.Application.Library.*"
+		 creationComplete="_creationComplete( event )"
+		 xmlns:Button="com.desktop.ui.Components.Button.*" 
+		 xmlns:ui="com.desktop.system.Application.Library.ui.*">
+	<ui:layout>
+		<s:HorizontalLayout/>
+	</ui:layout>
+	<fx:Script>
+		<![CDATA[
+			import components.events.QuickSearchEvent;
+			
+			import mx.events.FlexEvent;
+			
+			import spark.events.TextOperationEvent;
+			
+			protected function _creationComplete( event:FlexEvent ):void
+			{
+				clearSearchButton.visible = false;
+			}
+			
+			
+			protected function searchInput_changeHandler(event:TextOperationEvent):void
+			{
+				 searchInput.text.length > 0
+				 ?
+					clearSearchButton.visible = true
+					:
+					clearSearchButton.visible = false;
+			}
+			
+			protected function clearSearchButton_clickHandler(event:MouseEvent):void
+			{
+				clearSearchButton.visible = false;
+				searchInput.text = "";
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:HGroup verticalAlign="middle">
+		<s:TextInput id="searchInput" width="230" change="searchInput_changeHandler(event)" prompt="{resourceManager.getString(this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'quickSearch' ) }"/>
+		<Button:DesktopControllButton  id="clearSearchButton" 
+				   click="clearSearchButton_clickHandler(event)"
+				   toolTip="{resourceManager.getString(this.session.config.LOCALE_CONFIG.dictonaryResourceName, 'reset' ) }" 
+				   icon="{resourceManager.getClass(this.session.config.LOCALE_CONFIG.systemIconsResourceName, 'clearIcon', this.session.skinsLocaleName ) }" 
+				   skinClass="{resourceManager.getClass(this.session.config.LOCALE_CONFIG.skinsResourceName, 'desktopButton', this.session.skinsLocaleName ) }"/>
+	</s:HGroup>
+	
+	
+</ui:SkinBase>

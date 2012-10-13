@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:SkinBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx"
+		xmlns:Library="com.desktop.system.Application.Library.*"
+		xmlns:NavBars="com.desktop.ui.Components.NavBars.*" 
+		xmlns:ui="com.desktop.system.Application.Library.ui.*">
+	
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("com.desktop.ui.Components.DesktopComponent")]
+	</fx:Metadata>
+	
+	<fx:Script>
+		<![CDATA[
+			import com.desktop.ui.Components.DesktopComponent;
+			import com.desktop.ui.Components.NavBars.TaskBarPosition;
+			
+			import mx.events.FlexEvent;
+			import mx.events.ResizeEvent;
+			
+			override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
+			{
+				super.updateDisplayList(unscaledWidth, unscaledHeight);
+				
+				measure();
+				
+				switch( hostComponent.getStyle( "taskBarPosition" ) )
+				{
+					case DesktopComponent.TASK_BAR_BOTTOM_POSITION:
+						
+						desktopItemsGroup.y = 0;
+						desktopItemsGroup.x = 0;
+						
+						startMenu.x = 0;
+						startMenu.y = desktopItemsGroup.height - startMenu.height; 
+						
+						taskBar.x = 0;
+						taskBar.y = height - taskBar.height;
+						
+						notificationGroup.x = width - notificationGroup.width;
+						notificationGroup.y = 0;
+						
+					break;
+					case DesktopComponent.TASK_BAR_TOP_POSITION:
+						
+						desktopItemsGroup.y = taskBar.height;
+						desktopItemsGroup.x = 0;
+						
+						startMenu.x = 0;
+						startMenu.y = 0; 
+						
+						taskBar.x = 0;
+						taskBar.y = 0;
+						
+						notificationGroup.x = width - notificationGroup.width;
+						notificationGroup.y = taskBar.height;
+						
+					break;
+					case DesktopComponent.TASK_BAR_LEFT_POSITION:
+						
+						
+						taskBar.x = 0;
+						taskBar.y = 0;
+						
+						desktopItemsGroup.y = 0;
+						desktopItemsGroup.x = taskBar.width;
+						
+						startMenu.x = 0;
+						startMenu.y = 0; 
+						
+						notificationGroup.x = width - notificationGroup.width;
+						notificationGroup.y = 0;
+						
+					break;
+					
+					case DesktopComponent.TASK_BAR_RIGHT_POSITION:
+						
+						desktopItemsGroup.y = 0;
+						desktopItemsGroup.x = 0;
+						
+						startMenu.x = desktopItemsGroup.width - startMenu.width;
+						startMenu.y = 0; 
+						
+						taskBar.x = desktopItemsGroup.width;
+						taskBar.y = 0;
+						
+						notificationGroup.x = 0;
+						notificationGroup.y = 0;
+						
+					break;
+				}
+				
+				desktopItemsGroup.setElementIndex( startMenu, numElements - 1 );
+				
+			}
+			
+			override protected function measure():void
+			{
+				super.measure();
+				
+				var pos:String = hostComponent.getStyle( "taskBarPosition" ); 
+				
+				if( pos == DesktopComponent.TASK_BAR_LEFT_POSITION || pos == DesktopComponent.TASK_BAR_RIGHT_POSITION )
+				{
+					taskBar.height = height;
+					taskBar.width = taskBar.buttonBar.measuredWidth > taskBar.startMenuButton.measuredWidth  ? taskBar.buttonBar.measuredWidth : taskBar.startMenuButton.measuredWidth;
+					
+					desktopItemsGroup.width = width - taskBar.width;						
+					desktopItemsGroup.height = height;
+					
+					notificationGroup.height = height;
+				}
+				else if( pos == DesktopComponent.TASK_BAR_BOTTOM_POSITION || pos == DesktopComponent.TASK_BAR_TOP_POSITION )
+				{
+					taskBar.width = width;
+					taskBar.height = taskBar.buttonBar.measuredHeight > taskBar.startMenuButton.measuredHeight  ? taskBar.buttonBar.measuredHeight : taskBar.startMenuButton.measuredHeight;
+					
+					desktopItemsGroup.width = width;						
+					desktopItemsGroup.height = height - taskBar.height;
+					
+					notificationGroup.height = height - taskBar.height;
+				}
+			}
+			
+		]]>
+	</fx:Script>
+
+	<s:Group id="desktopContentAll" width="100%" height="100%">
+		
+		<s:Group id="desktopGroup">
+			
+			<s:Group id="desktopBackground" width="100%" height="100%">
+				
+				<s:Rect id="rectangleBackgroundWallpaper" width="100%" height="100%">
+					<s:fill>
+						<s:SolidColor id="solidColorBackgrondWallpaper" />
+					</s:fill>
+				</s:Rect>
+				
+				<s:Image id="imageBackgroundWallpaper" 
+						 smoothingQuality="high" 
+						 smooth="true"
+						 width="100%"
+						 height="100%"/>
+				
+			</s:Group>
+			
+			
+			<s:Group id="desktopItemsGroup">
+				
+				<NavBars:StartMenu id="startMenu" 
+								   skinClass="{ resourceManager.getClass( this.session.config.LOCALE_CONFIG.skinsResourceName, 'startMenu', this.session.skinsLocaleName ) }"/>				
+			</s:Group>
+			
+			
+			<s:Group id="notificationGroup" width="400" mouseEnabled="false">
+				<s:layout>
+					<s:VerticalLayout gap="10" verticalAlign="bottom"/>
+				</s:layout>
+			</s:Group>
+			
+			
+			<NavBars:TaskBar id="taskBar"
+							 thickness="{ getStyle( 'taskBarThickness' ) }"
+							 skinClass="{ resourceManager.getClass( this.session.config.LOCALE_CONFIG.skinsResourceName, 'taskBar', this.session.skinsLocaleName ) }" />
+			
+		</s:Group> 
+		<!-- END OF desktopGroup -->
+		
+	</s:Group>
+	<!-- END OF desktopContentAll -->
+
+</ui:SkinBase>
